@@ -32,7 +32,7 @@ public class JavaFxApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Load the MainView.fxml file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/person.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
         loader.setControllerFactory(context::getBean);  // Use Spring to inject controller dependencies
         Parent root = loader.load();
 

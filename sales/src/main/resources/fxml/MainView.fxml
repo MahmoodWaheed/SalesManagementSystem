@@ -17,7 +17,7 @@
         <ImageView fx:id="logo" fitHeight="50" fitWidth="150">
             <Image url="@/icons/ElSenwar.png" />
         </ImageView>
-        <Label prefHeight="35.0" prefWidth="264.0" style="-fx-font-size: 24px; -fx-text-fill: #6e1f8a;" text="abdo Ashraf Company ! " />
+        <Label prefHeight="35.0" prefWidth="264.0" style="-fx-font-size: 24px; -fx-text-fill: #6e1f8a;" text="MW Company ! " />
     </HBox>
 
     <SplitPane dividerPositions="0.2">
