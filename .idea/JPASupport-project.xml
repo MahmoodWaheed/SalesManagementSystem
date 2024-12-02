@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoGeneratorSettingsState">
+    <option name="ignoredFields">
+      <set>
+        <option value="" />
+      </set>
+    </option>
+    <option name="moduleName" value="sales" />
+    <option name="moduleNameToSettings">
+      <map>
+        <entry key="sales">
+          <value>
+            <ModuleSettings>
+              <option name="controllerPackageName" value="com.mahmoud.sales.controller" />
+              <option name="controllerParentDirectory" value="$PROJECT_DIR$/sales/src/main/java" />
+              <option name="dtoParentDirectory" value="$PROJECT_DIR$/sales/src/main/java" />
+              <option name="entityPackageName" value="com.mahmoud.sales.tem" />
+              <option name="entityParentDirectory" value="$PROJECT_DIR$/sales/src/main/java" />
+              <option name="generateController" value="true" />
+              <option name="generateService" value="true" />
+              <option name="mapperXmlParentDirectory" value="C:\Projects\Java\sales\sales\src\main\resources" />
+              <option name="repositoryPackageName" value="com.mahmoud.sales.repository" />
+              <option name="repositoryParentDirectory" value="$PROJECT_DIR$/sales/src/main/java" />
+              <option name="servicePackageName" value="com.mahmoud.sales.service" />
+              <option name="serviceParentDirectory" value="$PROJECT_DIR$/sales/src/main/java" />
+              <option name="voParentDirectory" value="$PROJECT_DIR$/sales/src/main/java" />
+            </ModuleSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="useJakartaEE" value="true" />
+  </component>
+  <component name="DatabaseSettingsState">
+    <option name="database" value="salesdb" />
+    <option name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+    <option name="driverPath" value="C:\mysql-connector-j-9.1.0\mysql-connector-j-9.1.0.jar" />
+    <option name="url" value="jdbc:mysql://{host}:{port}/{database}?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+  </component>
+</project>

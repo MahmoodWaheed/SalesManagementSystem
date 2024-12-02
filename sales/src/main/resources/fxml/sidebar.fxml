@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mahmoud.sales.controller.SidebarController">
+   <children>
+      <AnchorPane prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #F7F9F9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane layoutY="44.0" prefHeight="454.0" prefWidth="44.0" style="-fx-background-color: #FDFEFE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Button fx:id="dashboardButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Dashboard">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/dashboardIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="customerButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" onAction="#onCustomerButtonClick" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Customer">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/customerIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="supplierButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Supplier">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/supplierIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="employeeButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Employee">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/employee.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="reportsButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Reports">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/report.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="itemsButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Items">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/item.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="salesButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Sales">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/saleIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="purchaseButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Prucharse">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/PurchaseInvoiceIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="storeButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Store">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/storeIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="settingButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Setting">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/settings.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="logoutButton" alignment="TOP_LEFT" graphicTextGap="50.0" mnemonicParsing="false" prefWidth="199.0" style="-fx-background-color: #F7F9F9;" text="Logout">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="contentPane" layoutX="200.0" layoutY="44.0" prefHeight="454.0" prefWidth="600.0" style="-fx-background-color: #FDFEFE;" />
+   </children>
+</AnchorPane>

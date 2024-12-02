@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.mahmoud.sales.controller.PaymentController">
+    <children>
+        <TableView fx:id="paymentTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID"/>
+                <TableColumn fx:id="amountColumn" text="Amount"/>
+                <TableColumn fx:id="dateColumn" text="Payment Date"/>
+                <TableColumn fx:id="typeColumn" text="Payment Type"/>
+                <TableColumn fx:id="wayColumn" text="Payment Way"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <TextField fx:id="amountField" promptText="Amount"/>
+            <TextField fx:id="typeField" promptText="Payment Type"/>
+            <TextField fx:id="wayField" promptText="Payment Way"/>
+            <Button fx:id="addButton" text="Add" onAction="#addPayment"/>
+            <Button fx:id="deleteButton" text="Delete" onAction="#deletePayment"/>
+        </HBox>
+    </children>
+</VBox>

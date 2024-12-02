@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.mahmoud.sales.controller.PurchasedetailController">
+    <children>
+        <TableView fx:id="purchasedetailTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID"/>
+                <TableColumn fx:id="quantityColumn" text="Quantity"/>
+                <TableColumn fx:id="purchasingPriceColumn" text="Purchasing Price"/>
+                <TableColumn fx:id="cumulativePriceColumn" text="Cumulative Price"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <TextField fx:id="transactionIdField" promptText="Transaction ID"/>
+            <TextField fx:id="itemIdField" promptText="Item ID"/>
+            <TextField fx:id="quantityField" promptText="Quantity"/>
+            <TextField fx:id="purchasingPriceField" promptText="Purchasing Price"/>
+            <Button fx:id="addButton" text="Add" onAction="#addPurchasedetail"/>
+            <Button fx:id="deleteButton" text="Delete" onAction="#deletePurchasedetail"/>
+        </HBox>
+    </children>
+</VBox>

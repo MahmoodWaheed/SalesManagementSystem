@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<?import javafx.scene.control.*?>-->
+<!--<?import javafx.scene.layout.*?>-->
+<!--<VBox xmlns="http://javafx.com/javafx"-->
+<!--      xmlns:fx="http://javafx.com/fxml"-->
+<!--      fx:controller="com.mahmoud.sales.controller.PersonController">-->
+<!--    <children>-->
+<!--        <TableView fx:id="personTable">-->
+<!--            <columns>-->
+<!--                <TableColumn fx:id="idColumn" text="ID"/>-->
+<!--                <TableColumn fx:id="nameColumn" text="Name"/>-->
+<!--                <TableColumn fx:id="locationColumn" text="Location"/>-->
+<!--                <TableColumn fx:id="typeColumn" text="Type"/>-->
+<!--                <TableColumn fx:id="balanceColumn" text="Open Balance"/>-->
+<!--            </columns>-->
+<!--        </TableView>-->
+<!--        <HBox spacing="10">-->
+<!--            <TextField fx:id="nameField" promptText="Name"/>-->
+<!--            <TextField fx:id="locationField" promptText="Location"/>-->
+<!--            <TextField fx:id="typeField" promptText="Type"/>-->
+<!--            <TextField fx:id="balanceField" promptText="Open Balance"/>-->
+<!--            <Button fx:id="addButton" text="Add" onAction="#addPerson"/>-->
+<!--            <Button fx:id="deleteButton" text="Delete" onAction="#deletePerson"/>-->
+<!--        </HBox>-->
+<!--    </children>-->
+<!--</VBox>-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.mahmoud.sales.controller.PersonController">
+    <!-- Table View for displaying Person data -->
+    <TableView fx:id="personTable">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="nameColumn" text="Name" />
+            <TableColumn fx:id="locationColumn" text="Location" />
+            <TableColumn fx:id="typeColumn" text="Type" />
+            <TableColumn fx:id="balanceColumn" text="Open Balance" />
+            <TableColumn fx:id="phonesColumn" text="Phones" />
+        </columns>
+    </TableView>
+
+    <!-- Input Fields and Buttons -->
+    <HBox spacing="10">
+        <TextField fx:id="nameField" promptText="Name" />
+        <TextField fx:id="locationField" promptText="Location" />
+        <TextField fx:id="typeField" promptText="Type" />
+        <TextField fx:id="balanceField" promptText="Open Balance" />
+<!--        <Button fx:id="addButton" text="Add" onAction="#addPerson"/>-->
+<!--        <Button fx:id="deleteButton" text="Delete" onAction="#deletePerson"/>-->
+    </HBox>
+   <Button fx:id="handleShowCustomers" mnemonicParsing="false" onAction="#handleShowCustomers" text="abdoAshraf" />
+
+</VBox>

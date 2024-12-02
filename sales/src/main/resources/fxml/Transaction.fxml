@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.mahmoud.sales.controller.TransactionController">
+    <children>
+        <TableView fx:id="transactionTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID"/>
+                <TableColumn fx:id="transactionDateColumn" text="Transaction Date"/>
+                <TableColumn fx:id="amountColumn" text="Amount"/>
+                <TableColumn fx:id="transactionTypeColumn" text="Transaction Type"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <TextField fx:id="personIdField" promptText="Person ID"/>
+            <TextField fx:id="amountField" promptText="Amount"/>
+            <TextField fx:id="transactionTypeField" promptText="Transaction Type"/>
+            <Button fx:id="addButton" text="Add" onAction="#addTransaction"/>
+            <Button fx:id="deleteButton" text="Delete" onAction="#deleteTransaction"/>
+        </HBox>
+    </children>
+</VBox>
