@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class PersonController {
+public class SupplierController {
 
     private  PersonService personService;
     @FXML
@@ -191,12 +191,13 @@ public class PersonController {
         BigDecimal balance = new BigDecimal(balanceField.getText());
 
 
-        // Automatically set the type as "Customer"
+        // Automatically set the type as "Supplier"
         Person person = new Person();
         person.setName(name);
         person.setLocation(location);
-        person.setType("Customer"); // Set type to Customer
+        person.setType("Supplier"); // Set type to Supplier
         person.setOpenBalance(balance);
+
         personService.savePerson(person);
         loadPersons();  // Reload table
     }
@@ -215,15 +216,15 @@ public class PersonController {
         List<Person> persons = personService.findAllPersons();
 
         // Filter persons to show only those of type 'Supplier'
-        List<Person> customers = persons.stream()
-                .filter(person -> "Customer".equals(person.getType()))
+        List<Person> suppliers = persons.stream()
+                .filter(person -> "Supplier".equals(person.getType()))
                 .toList();
-        ObservableList<Person> customerData = FXCollections.observableArrayList(customers);
-        personTable.setItems(customerData);
 
 //        personList = FXCollections.observableArrayList(persons);
 //        personTable.setItems(personList);
 
+        ObservableList<Person> supplierData = FXCollections.observableArrayList(suppliers);
+        personTable.setItems(supplierData);
     }
 }
 

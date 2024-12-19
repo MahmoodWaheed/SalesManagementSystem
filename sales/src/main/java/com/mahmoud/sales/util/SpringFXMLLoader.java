@@ -1,25 +1,31 @@
 package com.mahmoud.sales.util;
 
+import com.mahmoud.sales.controller.PersonController;
+import jakarta.annotation.PostConstruct;
 import javafx.fxml.FXMLLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.util.Objects;
 
 @Component
 public class SpringFXMLLoader {
+    private static ApplicationContext applicationContext;
 
-    private final ApplicationContext context;
-
-    public SpringFXMLLoader(ApplicationContext context) {
-        this.context = context;
+    public SpringFXMLLoader(ApplicationContext applicationContext) {
+        SpringFXMLLoader.applicationContext = applicationContext;
     }
 
-    public Object load(URL url) throws IOException {
-        FXMLLoader loader = new FXMLLoader(url);
-        loader.setControllerFactory(context::getBean);  // Let Spring manage controllers
-        return loader.load();
+    @PostConstruct
+    public void init() {
+        // Ensure application context is properly initialized
+        Objects.requireNonNull(applicationContext, "Application context must not be null");
     }
+
+    public static <T> T loadController(Class<T> controllerClass) {
+        return applicationContext.getBean(controllerClass);
+    }
+
+
 }

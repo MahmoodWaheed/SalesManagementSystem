@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.PersonController">
+<VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.SupplierController">
     <!-- Table View for displaying Person data -->
     <TableView fx:id="personTable">
         <columns>
@@ -22,8 +22,8 @@
         </columns>
     </TableView>
 
-    <!-- Add new Customer button -->
-    <Button fx:id="addButton" text="Add New Customer" onAction="#handleAddPersonPopup"/>
+    <!-- Add new Supplier button -->
+    <Button fx:id="addButton" text="Add New Supplier" onAction="#handleAddPersonPopup"/>
 
     <!-- Input Fields and Buttons -->
     <HBox spacing="10">
@@ -31,8 +31,8 @@
         <TextField fx:id="locationField" promptText="Location" />
 <!--        <TextField fx:id="typeField" promptText="Type" />-->
         <TextField fx:id="balanceField" promptText="Open Balance" />
-<!--        <Button fx:id="addButton" text="Add" onAction="#addPerson"/>-->
-<!--        <Button fx:id="deleteButton" text="Delete" onAction="#deletePerson"/>-->
+        <!--        <Button fx:id="addButton" text="Add" onAction="#addPerson"/>-->
+        <!--        <Button fx:id="deleteButton" text="Delete" onAction="#deletePerson"/>-->
     </HBox>
 
 </VBox>

@@ -115,7 +115,7 @@ public class SidebarController {
             // If the controller is an instance of PersonController, load person data
             if (controller instanceof PersonController) {
                 PersonController personController = (PersonController) controller;
-                personController.loadPersonData2();  // Load person data into the table
+                personController.loadPersons();  // Load person data into the table
             }
 
             // Clear the existing content and add the new view
@@ -137,10 +137,10 @@ public class SidebarController {
         setView("Person.fxml");  // Load Customer view
     }
 
-//    @FXML
-//    public void onSupplierButtonClick() {
-//        setView("supplier.fxml");  // Load Supplier view
-//    }
+    @FXML
+    public void onSupplierButtonClick() {
+        setView("Supplier.fxml");  // Load Supplier view
+    }
 
     // Add similar methods for other buttons (Employee, Reports, Sales, etc.)
 }
