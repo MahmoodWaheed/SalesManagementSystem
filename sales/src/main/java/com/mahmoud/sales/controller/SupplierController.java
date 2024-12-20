@@ -51,6 +51,12 @@ public class SupplierController {
     private TextField typeField;
     @FXML
     private TextField balanceField;
+
+    @FXML
+    private Label supplierCountLabel;
+    @FXML
+    private Label totalOpenBalanceLabel;
+
     @FXML
     private TableColumn<Person, Void> actionColumn; // For buttons
 
@@ -138,9 +144,10 @@ public class SupplierController {
     }
 
     public void handleAddPersonPopup() {
-        // Logic for showing a popup to add a new person
-        // showPopup("Add New Person", "/fxml/addPerson.fxml", null);
-        addPerson();
+
+//        addPerson();
+        // Open the Add New Supplier popup window
+        showPopup("Add New Supplier", "/fxml/addSupplier.fxml", null);
     }
 
     @FXML
@@ -219,10 +226,17 @@ public class SupplierController {
         List<Person> suppliers = persons.stream()
                 .filter(person -> "Supplier".equals(person.getType()))
                 .toList();
+        // Update the supplier count and total open balance
+        int supplierCount = suppliers.size();
+        BigDecimal totalBalance = suppliers.stream()
+                .map(Person::getOpenBalance)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-//        personList = FXCollections.observableArrayList(persons);
-//        personTable.setItems(personList);
+        // Set the values in the text views
+        supplierCountLabel.setText("Number of Suppliers: " + supplierCount);
+        totalOpenBalanceLabel.setText("Total Open Balance: " + totalBalance);
 
+        // Load the suppliers into the table
         ObservableList<Person> supplierData = FXCollections.observableArrayList(suppliers);
         personTable.setItems(supplierData);
     }

@@ -153,7 +153,7 @@ public class PersonController {
 
             // Use the common interface to handle the person object instead of using if statements for each action
             PersonHandler controller = loader.getController();
-            controller.setPerson(person); // This works for both Edit , Delete and View
+            controller.setPerson(person); // This works for both Edit , Delete , add and View
 
 //            // Get the controller and pass the person to be edited
 //            EditPersonController controller = loader.getController();

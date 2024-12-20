@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,7 +8,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.SupplierController">
+<?import javafx.scene.control.Label?>
+<VBox layoutX="0.0" layoutY="20.0" prefHeight="470.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.SupplierController">
+    <!-- Add new Supplier button -->
+    <Button fx:id="addButton" onAction="#handleAddPersonPopup" text="Add New Supplier">
+      <VBox.margin>
+         <Insets />
+      </VBox.margin></Button>
+
+    <!-- Input Fields and Buttons -->
     <!-- Table View for displaying Person data -->
     <TableView fx:id="personTable">
         <columns>
@@ -23,16 +32,22 @@
     </TableView>
 
     <!-- Add new Supplier button -->
-    <Button fx:id="addButton" text="Add New Supplier" onAction="#handleAddPersonPopup"/>
+<!--    <Button fx:id="addButton" text="Add New Supplier" onAction="#handleAddPersonPopup"/>-->
 
     <!-- Input Fields and Buttons -->
     <HBox spacing="10">
-        <TextField fx:id="nameField" promptText="Name" />
-        <TextField fx:id="locationField" promptText="Location" />
-<!--        <TextField fx:id="typeField" promptText="Type" />-->
-        <TextField fx:id="balanceField" promptText="Open Balance" />
-        <!--        <Button fx:id="addButton" text="Add" onAction="#addPerson"/>-->
-        <!--        <Button fx:id="deleteButton" text="Delete" onAction="#deletePerson"/>-->
+        <!-- Display number of suppliers -->
+        <Label fx:id="supplierCountLabel" text="Number of Suppliers: 0" />
+
+        <!-- Display total open balance -->
+        <Label fx:id="totalOpenBalanceLabel" text="Total Open Balance: 0.00" />
+
+<!--        <TextField fx:id="nameField" promptText="Name" />-->
+<!--        <TextField fx:id="locationField" promptText="Location" />-->
+<!--&lt;!&ndash;        <TextField fx:id="typeField" promptText="Type" />&ndash;&gt;-->
+<!--        <TextField fx:id="balanceField" promptText="Open Balance" />-->
+<!--        &lt;!&ndash;        <Button fx:id="addButton" text="Add" onAction="#addPerson"/>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <Button fx:id="deleteButton" text="Delete" onAction="#deletePerson"/>&ndash;&gt;-->
     </HBox>
 
 </VBox>
