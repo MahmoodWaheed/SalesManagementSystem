@@ -51,6 +51,12 @@ public class PersonController {
     private TextField typeField;
     @FXML
     private TextField balanceField;
+
+    @FXML
+    private Label customerCountLabel;
+    @FXML
+    private Label totalOpenBalanceLabel;
+
     @FXML
     private TableColumn<Person, Void> actionColumn; // For buttons
 
@@ -138,9 +144,9 @@ public class PersonController {
     }
 
     public void handleAddPersonPopup() {
-        // Logic for showing a popup to add a new person
-        // showPopup("Add New Person", "/fxml/addPerson.fxml", null);
-        addPerson();
+        // Logic for showing a popup to add a new Customer
+         showPopup("Add New Person", "/fxml/addCustomer.fxml", null);
+//        addPerson();
     }
 
     @FXML
@@ -155,9 +161,6 @@ public class PersonController {
             PersonHandler controller = loader.getController();
             controller.setPerson(person); // This works for both Edit , Delete , add and View
 
-//            // Get the controller and pass the person to be edited
-//            EditPersonController controller = loader.getController();
-//            controller.setPerson(person);
 
             // Create a new stage for the popup window
             Stage stage = new Stage();
@@ -214,15 +217,23 @@ public class PersonController {
         // Fetch all persons from the service
         List<Person> persons = personService.findAllPersons();
 
-        // Filter persons to show only those of type 'Supplier'
+        // Filter persons to show only those of type 'Customer'
         List<Person> customers = persons.stream()
                 .filter(person -> "Customer".equals(person.getType()))
                 .toList();
+        // Update the customer count and total open balance
+        int customerCount = customers.size();
+        BigDecimal totalBalance = customers.stream()
+                .map(Person::getOpenBalance)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        // Set the values in the text views
+        customerCountLabel.setText("Number of Customers: " + customerCount);
+        totalOpenBalanceLabel.setText("Total Open Balance: " + totalBalance);
+
         ObservableList<Person> customerData = FXCollections.observableArrayList(customers);
         personTable.setItems(customerData);
 
-//        personList = FXCollections.observableArrayList(persons);
-//        personTable.setItems(personList);
 
     }
 }
