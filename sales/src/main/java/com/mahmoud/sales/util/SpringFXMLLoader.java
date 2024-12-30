@@ -1,12 +1,9 @@
 package com.mahmoud.sales.util;
 
-import com.mahmoud.sales.controller.PersonController;
 import jakarta.annotation.PostConstruct;
-import javafx.fxml.FXMLLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Objects;
 
 @Component

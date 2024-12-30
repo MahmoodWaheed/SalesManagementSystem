@@ -6,7 +6,6 @@ import com.mahmoud.sales.service.PersonService;
 import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,17 +15,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import javafx.util.Callback; // Correct import for JavaFX
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
-public class PersonController {
+public class CustomerController {
 
     private  PersonService personService;
     @FXML

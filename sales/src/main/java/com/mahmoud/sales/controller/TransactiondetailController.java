@@ -77,7 +77,7 @@ public class TransactiondetailController {
         transactionDetail.setQuantity(quantity);
         transactionDetail.setSellingPrice(sellingPrice);
         transactionDetail.setComulativePrice(comulativePrice);
-        transactionDetail.setPrice(price);
+//        transactionDetail.setPrice(price);
 
         transactiondetailService.saveTransactionDetail(transactionDetail);
         loadTransactionDetails();  // Reload table

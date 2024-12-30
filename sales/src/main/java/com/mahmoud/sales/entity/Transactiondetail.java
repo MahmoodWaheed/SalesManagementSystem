@@ -36,7 +36,4 @@ public class Transactiondetail {
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
-
 }

@@ -1,6 +1,5 @@
 package com.mahmoud.sales.controller;
 
-import com.mahmoud.sales.SalesApplication;
 import com.mahmoud.sales.service.PersonService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -112,11 +110,11 @@ public class SidebarController {
             // Get the controller for the loaded view
             Object controller = loader.getController();
 
-            // If the controller is an instance of PersonController, load person data
-            if (controller instanceof PersonController) {
-                PersonController personController = (PersonController) controller;
-                personController.loadPersons();  // Load person data into the table
-            }
+//            // If the controller is an instance of PersonController, load person data
+//            if (controller instanceof CustomerController) {
+//                CustomerController personController = (CustomerController) controller;
+//                personController.loadPersons();  // Load person data into the table
+//            }
 
             // Clear the existing content and add the new view
             contentPane.getChildren().setAll(node);
