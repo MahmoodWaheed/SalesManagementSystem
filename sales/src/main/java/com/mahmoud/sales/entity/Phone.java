@@ -16,7 +16,7 @@ public class Phone {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "phoneNumber", length = 15)
+    @Column(name = "phone_number", length = 15)
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)

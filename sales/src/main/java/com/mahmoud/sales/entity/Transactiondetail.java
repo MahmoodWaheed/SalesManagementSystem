@@ -25,10 +25,10 @@ public class Transactiondetail {
     @Column(name = "quantity", nullable = false)
     private Double quantity;
 
-    @Column(name = "sellingPrice", nullable = false, precision = 10, scale = 2)
+    @Column(name = "selling_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal sellingPrice;
 
-    @Column(name = "comulativePrice", nullable = false, precision = 10, scale = 2)
+    @Column(name = "comulative_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal comulativePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

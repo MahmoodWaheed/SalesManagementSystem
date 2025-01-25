@@ -25,13 +25,13 @@ public class Item {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "itemBalance", nullable = false)
+    @Column(name = "item_balance", nullable = false)
     private Double itemBalance;
 
-    @Column(name = "sellingPrice", precision = 10, scale = 2)
+    @Column(name = "selling_price", precision = 10, scale = 2)
     private BigDecimal sellingPrice;
 
-    @Column(name = "PurchasingPrice", precision = 10, scale = 2)
+    @Column(name = "purchasing_price", precision = 10, scale = 2)
     private BigDecimal purchasingPrice;
 
     @OneToMany(mappedBy = "item")

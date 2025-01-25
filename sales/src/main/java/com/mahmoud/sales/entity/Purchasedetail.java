@@ -19,16 +19,16 @@ public class Purchasedetail {
     @MapsId("purchasetransactionId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "PurchaseTransaction_id", nullable = false)
+    @JoinColumn(name = "purchase_transaction_id", nullable = false)
     private Purchasetransaction purchaseTransaction;
 
     @Column(name = "quantity", nullable = false)
     private Double quantity;
 
-    @Column(name = "purchasingPrice", nullable = false, precision = 10, scale = 2)
+    @Column(name = "purchasing_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal purchasingPrice;
 
-    @Column(name = "comulativePrice", precision = 10, scale = 2)
+    @Column(name = "comulative_price", precision = 10, scale = 2)
     private BigDecimal comulativePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

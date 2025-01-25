@@ -21,10 +21,10 @@ public class Purchasetransaction {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "purchaseDate", nullable = false)
+    @Column(name = "purchase_date", nullable = false)
     private Instant purchaseDate;
 
-    @Column(name = "totalAmount", nullable = false, precision = 10, scale = 2)
+    @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

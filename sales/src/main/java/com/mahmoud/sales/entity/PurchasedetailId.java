@@ -16,7 +16,7 @@ public class PurchasedetailId implements java.io.Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "PurchaseTransaction_id", nullable = false)
+    @Column(name = "purchase_transaction_id", nullable = false)
     private Integer purchasetransactionId;
 
     @Override

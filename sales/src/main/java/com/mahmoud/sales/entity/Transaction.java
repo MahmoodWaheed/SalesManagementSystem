@@ -21,15 +21,15 @@ public class Transaction {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "transactionDate", nullable = false)
+    @Column(name = "transaction_date", nullable = false)
     private Instant transactionDate;
 
-    @Column(name = "totalAmount", nullable = false, precision = 10, scale = 2)
+    @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "salesRepId", nullable = false)
+    @JoinColumn(name = "sales_rep_id", nullable = false)
     private Employee salesRep;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

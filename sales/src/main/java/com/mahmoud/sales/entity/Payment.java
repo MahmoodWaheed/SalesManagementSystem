@@ -22,14 +22,14 @@ public class Payment {
     @Column(name = "amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
 
-    @Column(name = "paymentDate", nullable = false)
+    @Column(name = "payment_date", nullable = false)
     private Instant paymentDate;
 
     @Lob
-    @Column(name = "paymentType", nullable = false)
+    @Column(name = "payment_type", nullable = false)
     private String paymentType;
 
-    @Column(name = "paymentWay", nullable = false, length = 45)
+    @Column(name = "payment_way", nullable = false, length = 45)
     private String paymentWay;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +44,7 @@ public class Payment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "PurchaseTransaction_id")
+    @JoinColumn(name = "Purchase_transaction_id")
     private Purchasetransaction purchaseTransaction;
 
 }
