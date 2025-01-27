@@ -1,8 +1,10 @@
 package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Person;
+import com.mahmoud.sales.entity.Phone;
 import com.mahmoud.sales.handler.PersonHandler;
 import com.mahmoud.sales.service.PersonService;
+import com.mahmoud.sales.service.PhoneService;
 import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +30,8 @@ import java.util.stream.Collectors;
 @Controller
 public class SupplierController {
 
+    private PhoneService phoneService;
+
     private  PersonService personService;
     @FXML
     private TableView<Person> personTable;
@@ -40,9 +44,17 @@ public class SupplierController {
     @FXML
     private TableColumn<Person, String> typeColumn;
     @FXML
+    public TableColumn<Person, BigDecimal> remainingBalanceColumn;
+    @FXML
     private TableColumn<Person, BigDecimal> balanceColumn;
     @FXML
     private TableColumn<Person, String> phonesColumn;
+
+    @FXML
+    private TableColumn<Person, BigDecimal> transactionAmountColumn;
+    @FXML
+    private TableColumn<Person, BigDecimal> paymentAmountColumn;
+
     @FXML
     private TextField nameField;
     @FXML
@@ -66,6 +78,8 @@ public class SupplierController {
     public void initialize() {
         // Manually wire dependencies using SpringFXMLLoader
         this.personService = SpringFXMLLoader.loadController(PersonService.class);
+        this.phoneService = SpringFXMLLoader.loadController(PhoneService.class);
+
 
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -73,6 +87,27 @@ public class SupplierController {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         balanceColumn.setCellValueFactory(new PropertyValueFactory<>("openBalance"));
+//        transactionAmountColumn.setCellValueFactory(new PropertyValueFactory<>("transactionAmount"));
+//        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<>("paymentAmount"));
+//        remainingBalanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
+
+        // Add a column for phones
+        phonesColumn.setCellValueFactory(cellData -> {
+            Person person = cellData.getValue();
+            List<Phone> phones = phoneService.findPhonesByPersonId(person.getId());
+            String phoneNumbers = phones.stream().map(Phone::getPhoneNumber).collect(Collectors.joining(", "));
+            return new javafx.beans.property.SimpleStringProperty(phoneNumbers);
+        });
+
+        // Add a column for remaining balance
+        remainingBalanceColumn.setCellValueFactory(cellData -> {
+            Person person = cellData.getValue();
+
+            // Get the remaining balance for the person
+            BigDecimal remainingBalance = personService.calculateRemainingBalance(person.getId());
+
+            return new javafx.beans.property.SimpleObjectProperty<>(remainingBalance);
+        });
 
         // Load all persons into the table
         loadPersons();
@@ -234,6 +269,20 @@ public class SupplierController {
         // Load the suppliers into the table
         ObservableList<Person> supplierData = FXCollections.observableArrayList(suppliers);
         personTable.setItems(supplierData);
+
+//        // Display the phone numbers in the table by fetching them using the phoneService
+//        System.out.println("Loading phone numbers for suppliers"); // Debugging
+//        phonesColumn.setCellValueFactory(cellData -> {
+//            Person person = cellData.getValue();
+//            System.out.println("Person: " + person.getName()); // Debugging
+//            List<Phone> phones = phoneService.findPhonesByPersonId(person.getId());
+//            System.out.println("Phones: " + phones.size()); // Debugging
+//            phones.forEach(phone -> System.out.println("Phone: " + phone.getPhoneNumber())); // Debugging
+//            String phoneNumbers = phones.stream()
+//                    .map(Phone::getPhoneNumber)
+//                    .collect(Collectors.joining(", "));
+//            return new javafx.beans.property.SimpleStringProperty(phoneNumbers);
+//        });
     }
 }
 

@@ -1,8 +1,10 @@
 package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Person;
+import com.mahmoud.sales.entity.Phone;
 import com.mahmoud.sales.handler.PersonHandler;
 import com.mahmoud.sales.service.PersonService;
+import com.mahmoud.sales.service.PhoneService;
 import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,14 +17,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javafx.util.Callback; // Correct import for JavaFX
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CustomerController {
 
+
+    @Autowired
     private  PersonService personService;
     @FXML
     private TableView<Person> personTable;
@@ -35,9 +41,16 @@ public class CustomerController {
     @FXML
     private TableColumn<Person, String> typeColumn;
     @FXML
+    public TableColumn<Person, BigDecimal> remainingBalanceColumn;
+    @FXML
     private TableColumn<Person, BigDecimal> balanceColumn;
     @FXML
     private TableColumn<Person, String> phonesColumn;
+    @FXML
+    private TableColumn<Person, BigDecimal> transactionAmountColumn;
+    @FXML
+    private TableColumn<Person, BigDecimal> paymentAmountColumn;
+
     @FXML
     private TextField nameField;
     @FXML
@@ -56,11 +69,13 @@ public class CustomerController {
     private TableColumn<Person, Void> actionColumn; // For buttons
 
     private ObservableList<Person> personList;
+    private PhoneService phoneService;
 
     @FXML
     public void initialize() {
         // Manually wire dependencies using SpringFXMLLoader
         this.personService = SpringFXMLLoader.loadController(PersonService.class);
+        this.phoneService = SpringFXMLLoader.loadController(PhoneService.class);
 
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -68,6 +83,27 @@ public class CustomerController {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         balanceColumn.setCellValueFactory(new PropertyValueFactory<>("openBalance"));
+//        transactionAmountColumn.setCellValueFactory(new PropertyValueFactory<>("transactionAmount"));
+//        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<>("paymentAmount"));
+//        remainingBalanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
+
+        // Add a column for phones
+        phonesColumn.setCellValueFactory(cellData -> {
+            Person person = cellData.getValue();
+            List<Phone> phones = phoneService.findPhonesByPersonId(person.getId());
+            String phoneNumbers = phones.stream().map(Phone::getPhoneNumber).collect(Collectors.joining(", "));
+            return new javafx.beans.property.SimpleStringProperty(phoneNumbers);
+        });
+
+        // Add a column for remaining balance
+        remainingBalanceColumn.setCellValueFactory(cellData -> {
+            Person person = cellData.getValue();
+
+            // Get the remaining balance for the person
+            BigDecimal remainingBalance = personService.calculateRemainingBalance(person.getId());
+
+            return new javafx.beans.property.SimpleObjectProperty<>(remainingBalance);
+        });
 
         // Load all persons into the table
         loadPersons();
@@ -216,6 +252,9 @@ public class CustomerController {
         List<Person> customers = persons.stream()
                 .filter(person -> "Customer".equals(person.getType()))
                 .toList();
+
+
+
         // Update the customer count and total open balance
         int customerCount = customers.size();
         BigDecimal totalBalance = customers.stream()
@@ -225,6 +264,26 @@ public class CustomerController {
         // Set the values in the text views
         customerCountLabel.setText("Number of Customers: " + customerCount);
         totalOpenBalanceLabel.setText("Total Open Balance: " + totalBalance);
+
+//        // Fetch transaction details (transaction amount, payment amount, balance) for each customer
+//        List<Object[]> transactionDetails = personService.getPersonRemainingBalance();
+//
+//        // Combine the transaction details with the customers
+//        for (Object[] detail : transactionDetails) {
+//            Integer personId = (Integer) detail[0];
+//            BigDecimal transactionAmount = (BigDecimal) detail[1];
+//            BigDecimal paymentAmount = (BigDecimal) detail[2];
+//            BigDecimal balance = (BigDecimal) detail[3];
+//
+//            // Find the corresponding customer in the list and set the values
+//            customers.stream()
+//                    .filter(person -> person.getId().equals(personId))
+//                    .forEach(person -> {
+//                        person.setTransactionAmount(transactionAmount);
+//                        person.setPaymentAmount(paymentAmount);
+//                        person.setBalance(balance);
+//                    });
+//        }
 
         ObservableList<Person> customerData = FXCollections.observableArrayList(customers);
         personTable.setItems(customerData);

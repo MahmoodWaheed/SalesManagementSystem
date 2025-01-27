@@ -20,6 +20,7 @@
             <TableColumn fx:id="locationColumn" text="Location" />
             <TableColumn fx:id="typeColumn" text="Type" />
             <TableColumn fx:id="balanceColumn" text="Open Balance" />
+            <TableColumn fx:id="remainingBalanceColumn" text="Total Balance" />
             <TableColumn fx:id="phonesColumn" text="Phones" />
             <!-- Action Buttons Column -->
             <TableColumn fx:id="actionColumn" text="Actions" />

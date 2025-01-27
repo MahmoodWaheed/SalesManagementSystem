@@ -132,7 +132,7 @@ public class SidebarController {
 
     @FXML
     public void onCustomerButtonClick() {
-        setView("Person.fxml");  // Load Customer view
+        setView("Customer.fxml");  // Load Customer view
     }
 
     @FXML
