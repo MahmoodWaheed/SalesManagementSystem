@@ -101,6 +101,8 @@ public class CustomerController {
 
             // Get the remaining balance for the person
             BigDecimal remainingBalance = personService.calculateRemainingBalance(person.getId());
+            BigDecimal obenBalance = person.getOpenBalance();
+            remainingBalance = remainingBalance.subtract(obenBalance);
 
             return new javafx.beans.property.SimpleObjectProperty<>(remainingBalance);
         });

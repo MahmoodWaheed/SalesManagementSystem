@@ -105,6 +105,8 @@ public class SupplierController {
 
             // Get the remaining balance for the person
             BigDecimal remainingBalance = personService.calculateRemainingBalance(person.getId());
+            BigDecimal obenBalance = person.getOpenBalance();
+            remainingBalance = obenBalance.add(remainingBalance);
 
             return new javafx.beans.property.SimpleObjectProperty<>(remainingBalance);
         });
