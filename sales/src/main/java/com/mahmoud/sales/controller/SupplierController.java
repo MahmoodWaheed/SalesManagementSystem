@@ -77,6 +77,8 @@ public class SupplierController {
         // Manually wire dependencies using SpringFXMLLoader
         this.personService = SpringFXMLLoader.loadController(PersonService.class);
         this.phoneService = SpringFXMLLoader.loadController(PhoneService.class);
+        // Set the column resize policy to CONSTRAINED_RESIZE_POLICY
+        personTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 
         // Initialize table columns

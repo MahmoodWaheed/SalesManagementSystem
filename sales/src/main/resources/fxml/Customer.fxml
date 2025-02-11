@@ -8,12 +8,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 
-<VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.CustomerController">
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mahmoud.sales.controller.CustomerController">
 
     <!-- Add new Customer button -->
     <Button fx:id="addButton" text="Add New Customer" onAction="#handleAddPersonPopup"/>
-    <!-- Table View for displaying Person data -->
-    <TableView fx:id="personTable">
+
+    <!-- Table View (Expands to fill available space) -->
+    <TableView fx:id="personTable" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="idColumn" text="ID" />
             <TableColumn fx:id="nameColumn" text="Name" />
@@ -22,21 +25,57 @@
             <TableColumn fx:id="balanceColumn" text="Open Balance" />
             <TableColumn fx:id="remainingBalanceColumn" text="Total Balance" />
             <TableColumn fx:id="phonesColumn" text="Phones" />
-            <!-- Action Buttons Column -->
             <TableColumn fx:id="actionColumn" text="Actions" />
         </columns>
     </TableView>
 
     <!-- Input Fields and Buttons -->
     <HBox spacing="10">
-        <!-- Display number of customers -->
         <Label fx:id="customerCountLabel" text="Number of Customers: 0" />
-
-        <!-- Display total open balance -->
         <Label fx:id="totalOpenBalanceLabel" text="Total Open Balance: 0.00" />
-
-        <!-- اجمالى المديونية -->
         <Label fx:id="totalBalanceLabel" text="أجمالى المديونية: 0.00" />
     </HBox>
 
 </VBox>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--<?import javafx.scene.control.Button?>-->
+<!--<?import javafx.scene.control.TableColumn?>-->
+<!--<?import javafx.scene.control.TableView?>-->
+<!--<?import javafx.scene.control.TextField?>-->
+<!--<?import javafx.scene.layout.HBox?>-->
+<!--<?import javafx.scene.layout.VBox?>-->
+<!--<?import javafx.scene.control.Label?>-->
+
+<!--<VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.CustomerController">-->
+
+<!--    &lt;!&ndash; Add new Customer button &ndash;&gt;-->
+<!--    <Button fx:id="addButton" text="Add New Customer" onAction="#handleAddPersonPopup"/>-->
+<!--    &lt;!&ndash; Table View for displaying Person data &ndash;&gt;-->
+<!--    <TableView fx:id="personTable">-->
+<!--        <columns>-->
+<!--            <TableColumn fx:id="idColumn" text="ID" />-->
+<!--            <TableColumn fx:id="nameColumn" text="Name" />-->
+<!--            <TableColumn fx:id="locationColumn" text="Location" />-->
+<!--            <TableColumn fx:id="typeColumn" text="Type" />-->
+<!--            <TableColumn fx:id="balanceColumn" text="Open Balance" />-->
+<!--            <TableColumn fx:id="remainingBalanceColumn" text="Total Balance" />-->
+<!--            <TableColumn fx:id="phonesColumn" text="Phones" />-->
+<!--            &lt;!&ndash; Action Buttons Column &ndash;&gt;-->
+<!--            <TableColumn fx:id="actionColumn" text="Actions" />-->
+<!--        </columns>-->
+<!--    </TableView>-->
+
+<!--    &lt;!&ndash; Input Fields and Buttons &ndash;&gt;-->
+<!--    <HBox spacing="10">-->
+<!--        &lt;!&ndash; Display number of customers &ndash;&gt;-->
+<!--        <Label fx:id="customerCountLabel" text="Number of Customers: 0" />-->
+
+<!--        &lt;!&ndash; Display total open balance &ndash;&gt;-->
+<!--        <Label fx:id="totalOpenBalanceLabel" text="Total Open Balance: 0.00" />-->
+
+<!--        &lt;!&ndash; اجمالى المديونية &ndash;&gt;-->
+<!--        <Label fx:id="totalBalanceLabel" text="أجمالى المديونية: 0.00" />-->
+<!--    </HBox>-->
+
+<!--</VBox>-->

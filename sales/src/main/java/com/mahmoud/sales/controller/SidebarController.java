@@ -55,22 +55,40 @@ public class SidebarController {
     private Button logoutButton;
     @Autowired
     private PersonService personService;
+//    private void setView(String fxmlFile) {
+//        try {
+//            // Load the FXML file for the selected view
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile));
+//            Node node = loader.load();
+//
+//            // Get the controller for the loaded view
+//            Object controller = loader.getController();
+//
+////            // If the controller is an instance of PersonController, load person data
+////            if (controller instanceof CustomerController) {
+////                CustomerController personController = (CustomerController) controller;
+////                personController.loadPersons();  // Load person data into the table
+////            }
+//
+//            // Clear the existing content and add the new view
+//            contentPane.getChildren().setAll(node);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     private void setView(String fxmlFile) {
         try {
-            // Load the FXML file for the selected view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile));
             Node node = loader.load();
 
-            // Get the controller for the loaded view
-            Object controller = loader.getController();
+            // Anchor the node to all sides of the contentPane
+            AnchorPane.setTopAnchor(node, 0.0);
+            AnchorPane.setBottomAnchor(node, 0.0);
+            AnchorPane.setLeftAnchor(node, 0.0);
+            AnchorPane.setRightAnchor(node, 0.0);
 
-//            // If the controller is an instance of PersonController, load person data
-//            if (controller instanceof CustomerController) {
-//                CustomerController personController = (CustomerController) controller;
-//                personController.loadPersons();  // Load person data into the table
-//            }
-
-            // Clear the existing content and add the new view
             contentPane.getChildren().setAll(node);
 
         } catch (IOException e) {
@@ -93,6 +111,47 @@ public class SidebarController {
     public void onSupplierButtonClick() {
         setView("Supplier.fxml");  // Load Supplier view
     }
+
+    @FXML
+    public void onEmployeeButtonClick() {
+        setView("Employee.fxml");  // Load Employee view
+    }
+
+    @FXML
+    public void onReportsButtonClick() {
+        setView("Reports.fxml");  // Load Reports view
+    }
+
+    @FXML
+    public void onItemsButtonClick() {
+        setView("Items.fxml");  // Load Items view
+    }
+
+    @FXML
+    public void onSalesButtonClick() {
+        setView("Sales.fxml");  // Load Sales view
+    }
+
+    @FXML
+    public void onPurchaseButtonClick() {
+        setView("Purchase.fxml");  // Load Purchase view
+    }
+
+    @FXML
+    public void onStoreButtonClick() {
+        setView("Store.fxml");  // Load Store view
+    }
+
+    @FXML
+    public void onSettingButtonClick() {
+        setView("Setting.fxml");  // Load Setting view
+    }
+
+    @FXML
+    public void onLogoutButtonClick() {
+        setView("Login.fxml");  // Load Login view
+    }
+
 
     // Add similar methods for other buttons (Employee, Reports, Sales, etc.)
 }

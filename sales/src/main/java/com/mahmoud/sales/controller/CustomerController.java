@@ -75,7 +75,7 @@ public class CustomerController {
         // Manually wire dependencies using SpringFXMLLoader
         this.personService = SpringFXMLLoader.loadController(PersonService.class);
         this.phoneService = SpringFXMLLoader.loadController(PhoneService.class);
-
+        personTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
