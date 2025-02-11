@@ -2,6 +2,8 @@ package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Employee;
 import com.mahmoud.sales.service.EmployeeService;
+import com.mahmoud.sales.service.ItemService;
+import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,6 +46,9 @@ public class EmployeeController {
 
     @FXML
     public void initialize() {
+        // Manually wire dependencies using SpringFXMLLoader
+        this.employeeService = SpringFXMLLoader.loadController(EmployeeService.class);
+
         // Initialize the table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

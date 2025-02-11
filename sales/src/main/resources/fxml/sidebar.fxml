@@ -53,7 +53,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="employeeButton" mnemonicParsing="false" style="-fx-background-color: #F7F9F9;" text="Employee" maxWidth="Infinity">
+            <Button fx:id="employeeButton" mnemonicParsing="false" onAction="#onEmployeeButtonClick" style="-fx-background-color: #F7F9F9;" text="Employee" maxWidth="Infinity">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -65,7 +65,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="reportsButton" mnemonicParsing="false" style="-fx-background-color: #F7F9F9;" text="Reports" maxWidth="Infinity">
+            <Button fx:id="reportsButton" mnemonicParsing="false" onAction="#onReportsButtonClick" style="-fx-background-color: #F7F9F9;" text="Reports" maxWidth="Infinity">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -77,7 +77,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="itemsButton" mnemonicParsing="false" style="-fx-background-color: #F7F9F9;" text="Items" maxWidth="Infinity">
+            <Button fx:id="itemsButton" mnemonicParsing="false" onAction="#onItemsButtonClick" style="-fx-background-color: #F7F9F9;" text="Items" maxWidth="Infinity">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -89,7 +89,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="salesButton" mnemonicParsing="false" style="-fx-background-color: #F7F9F9;" text="Sales" maxWidth="Infinity">
+            <Button fx:id="salesButton" mnemonicParsing="false" onAction="#onSalesButtonClick" style="-fx-background-color: #F7F9F9;" text="Sales" maxWidth="Infinity">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

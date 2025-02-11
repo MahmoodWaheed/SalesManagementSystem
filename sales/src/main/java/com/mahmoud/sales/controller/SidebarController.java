@@ -114,7 +114,7 @@ public class SidebarController {
 
     @FXML
     public void onEmployeeButtonClick() {
-        setView("Employee.fxml");  // Load Employee view
+        setView("EmployeeView.fxml");  // Load Employee view
     }
 
     @FXML
@@ -124,12 +124,12 @@ public class SidebarController {
 
     @FXML
     public void onItemsButtonClick() {
-        setView("Items.fxml");  // Load Items view
+        setView("ItemView.fxml");  // Load Items view
     }
 
     @FXML
     public void onSalesButtonClick() {
-        setView("Sales.fxml");  // Load Sales view
+        setView("Transaction.fxml");  // Load Sales view
     }
 
     @FXML
