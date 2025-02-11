@@ -1,7 +1,9 @@
 package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Purchasetransaction;
+import com.mahmoud.sales.service.PersonService;
 import com.mahmoud.sales.service.PurchasetransactionService;
+import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -46,6 +48,9 @@ public class PurchasetransactionController {
 
     @FXML
     public void initialize() {
+
+        // Manually wire dependencies using SpringFXMLLoader
+        this.purchasetransactionService = SpringFXMLLoader.loadController(PurchasetransactionService.class);
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         purchaseDateColumn.setCellValueFactory(new PropertyValueFactory<>("purchaseDate"));

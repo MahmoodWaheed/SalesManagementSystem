@@ -171,7 +171,7 @@ public class CustomerController {
 
     public void handleViewPopup(Person person) {
         // Logic for showing a view details popup
-        showPopup("View Person", "/fxml/viewPerson.fxml", person);
+        showPopup("View Person", "/fxml/ViewPerson.fxml", person);
     }
 
     public void handleAddPersonPopup() {

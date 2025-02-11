@@ -1,7 +1,9 @@
 package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Phone;
+import com.mahmoud.sales.service.PersonService;
 import com.mahmoud.sales.service.PhoneService;
+import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,6 +42,8 @@ public class PhoneController {
 
     @FXML
     public void initialize() {
+        // Manually wire dependencies using SpringFXMLLoader
+        this.phoneService = SpringFXMLLoader.loadController(PhoneService.class);
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));

@@ -2,7 +2,9 @@ package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Purchasedetail;
 import com.mahmoud.sales.entity.PurchasedetailId;
+import com.mahmoud.sales.service.PersonService;
 import com.mahmoud.sales.service.PurchasedetailService;
+import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,6 +50,9 @@ public class PurchasedetailController {
 
     @FXML
     public void initialize() {
+
+        // Manually wire dependencies using SpringFXMLLoader
+        this.purchasedetailService = SpringFXMLLoader.loadController(PurchasedetailService.class);
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
