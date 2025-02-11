@@ -6,8 +6,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Label?>
+
 <VBox layoutX="0.0" layoutY="20.0" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.CustomerController">
 
     <!-- Add new Customer button -->
@@ -34,6 +34,9 @@
 
         <!-- Display total open balance -->
         <Label fx:id="totalOpenBalanceLabel" text="Total Open Balance: 0.00" />
+
+        <!-- اجمالى المديونية -->
+        <Label fx:id="totalBalanceLabel" text="أجمالى المديونية: 0.00" />
     </HBox>
 
 </VBox>

@@ -40,6 +40,8 @@
         <Label fx:id="supplierCountLabel" text="Number of Suppliers: 0" />
         <!-- Display total open balance -->
         <Label fx:id="totalOpenBalanceLabel" text="Total Open Balance: 0.00" />
+        <!-- اجمالى المديونية -->
+        <Label fx:id="totalBalanceLabel" text="أجمالى المديونية: 0.00" />
     </HBox>
 
 </VBox>

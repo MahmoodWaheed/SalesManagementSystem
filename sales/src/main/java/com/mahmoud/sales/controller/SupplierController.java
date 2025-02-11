@@ -49,12 +49,10 @@ public class SupplierController {
     private TableColumn<Person, BigDecimal> balanceColumn;
     @FXML
     private TableColumn<Person, String> phonesColumn;
-
     @FXML
     private TableColumn<Person, BigDecimal> transactionAmountColumn;
     @FXML
     private TableColumn<Person, BigDecimal> paymentAmountColumn;
-
     @FXML
     private TextField nameField;
     @FXML
@@ -63,12 +61,12 @@ public class SupplierController {
     private TextField typeField;
     @FXML
     private TextField balanceField;
-
     @FXML
     private Label supplierCountLabel;
     @FXML
     private Label totalOpenBalanceLabel;
-
+    @FXML
+    private Label totalBalanceLabel;
     @FXML
     private TableColumn<Person, Void> actionColumn; // For buttons
 
@@ -264,9 +262,16 @@ public class SupplierController {
                 .map(Person::getOpenBalance)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        // Update the أجمالى المديونية (Total Remaining Balance)
+        BigDecimal totalBalanceAll = suppliers.stream()
+                .map(supplier -> personService.calculateRemainingBalance(supplier.getId())
+                        .add(supplier.getOpenBalance()))  // remainingBalance = totalTransactions - openBalance
+                .reduce(BigDecimal.ZERO, BigDecimal::add);  // Sum all remaining balances
+
         // Set the values in the text views
         supplierCountLabel.setText("Number of Suppliers: " + supplierCount);
         totalOpenBalanceLabel.setText("Total Open Balance: " + totalBalance);
+        totalBalanceLabel.setText(": أجمالى المديونية" +totalBalanceAll);
 
         // Load the suppliers into the table
         ObservableList<Person> supplierData = FXCollections.observableArrayList(suppliers);

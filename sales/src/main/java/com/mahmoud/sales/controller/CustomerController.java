@@ -50,7 +50,6 @@ public class CustomerController {
     private TableColumn<Person, BigDecimal> transactionAmountColumn;
     @FXML
     private TableColumn<Person, BigDecimal> paymentAmountColumn;
-
     @FXML
     private TextField nameField;
     @FXML
@@ -59,12 +58,12 @@ public class CustomerController {
     private TextField typeField;
     @FXML
     private TextField balanceField;
-
     @FXML
     private Label customerCountLabel;
     @FXML
     private Label totalOpenBalanceLabel;
-
+    @FXML
+    private Label totalBalanceLabel;
     @FXML
     private TableColumn<Person, Void> actionColumn; // For buttons
 
@@ -159,7 +158,6 @@ public class CustomerController {
         };
         actionColumn.setCellFactory(cellFactory);
     }
-
     // Handlers for popups
     public void handleDeletePopup(Person person) {
         // Logic for showing a delete confirmation popup
@@ -263,9 +261,16 @@ public class CustomerController {
                 .map(Person::getOpenBalance)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        // Update the أجمالى المديونية (Total Remaining Balance)
+        BigDecimal totalBalanceAll = customers.stream()
+                .map(customer -> personService.calculateRemainingBalance(customer.getId())
+                        .subtract(customer.getOpenBalance()))  // remainingBalance = totalTransactions - openBalance
+                .reduce(BigDecimal.ZERO, BigDecimal::add);  // Sum all remaining balances
+
         // Set the values in the text views
         customerCountLabel.setText("Number of Customers: " + customerCount);
         totalOpenBalanceLabel.setText("Total Open Balance: " + totalBalance);
+        totalBalanceLabel.setText(": أجمالى المديونية" +totalBalanceAll);
 
 //        // Fetch transaction details (transaction amount, payment amount, balance) for each customer
 //        List<Object[]> transactionDetails = personService.getPersonRemainingBalance();
