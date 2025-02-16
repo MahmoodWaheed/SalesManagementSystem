@@ -48,4 +48,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     // Query to get the total payment amount for a person from the 'payment' table
     @Query("SELECT SUM(p.amount) FROM Payment p WHERE p.person.id = :personId")
     BigDecimal findTotalPaymentAmountByPersonId(@Param("personId") Integer personId);
+
+    public List<Person> findByType(String type);
 }

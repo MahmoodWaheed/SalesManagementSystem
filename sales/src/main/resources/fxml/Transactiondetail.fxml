@@ -10,6 +10,7 @@
         <TableView fx:id="transactiondetailTable">
             <columns>
                 <TableColumn fx:id="idColumn" text="ID"/>
+                <TableColumn fx:id="itemColumn" text="Item"/>
                 <TableColumn fx:id="quantityColumn" text="Quantity"/>
                 <TableColumn fx:id="sellingPriceColumn" text="Selling Price"/>
                 <TableColumn fx:id="comulativePriceColumn" text="Cumulative Price"/>

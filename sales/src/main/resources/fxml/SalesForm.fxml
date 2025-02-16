@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.mahmoud.sales.controller.SalesFormController"
+      spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Transaction Header Section -->
+    <TitledPane text="Transaction Header" expanded="true">
+        <content>
+            <GridPane hgap="10" vgap="10">
+                <children>
+                    <Label text="Person ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="personIdField" promptText="Enter Person ID" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label text="Total Amount:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <TextField fx:id="amountField" promptText="Enter Total Amount" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <Label text="Transaction Type:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField fx:id="transactionTypeField" promptText="Enter Transaction Type" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                    <Button fx:id="addTransactionButton" text="Save Transaction" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                            onAction="#addTransaction"/>
+                    <!-- New Next Button -->
+                    <Button fx:id="nextTransactionButton" text="Next" GridPane.columnIndex="2" GridPane.rowIndex="3"
+                            onAction="#onNextTransaction"/>
+                    <!-- New Previous button -->
+                    <Button fx:id="previousTransactionButton" text="Previous" onAction="#onPreviousTransaction"/>
+
+                    <!-- Label to show the generated Transaction ID -->
+                    <Label fx:id="transactionIdLabel" text="Transaction ID: " GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+
+                    <Label text="Employee ID:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <TextField fx:id="employeeIdField" promptText="Enter Employee ID" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                </children>
+            </GridPane>
+        </content>
+    </TitledPane>
+
+    <!-- Transaction Detail Section -->
+    <TitledPane text="Transaction Details" expanded="true">
+        <content>
+            <VBox spacing="10">
+                <TableView fx:id="transactionDetailTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="tdIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="itemColumn" text="Item" prefWidth="150"/>
+                        <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100"/>
+                        <TableColumn fx:id="sellingPriceColumn" text="Selling Price" prefWidth="100"/>
+                        <TableColumn fx:id="comulativePriceColumn" text="Cumulative Price" prefWidth="120"/>
+                    </columns>
+                </TableView>
+                <HBox spacing="10">
+                    <TextField fx:id="tdQuantityField" promptText="Quantity"/>
+                    <TextField fx:id="tdSellingPriceField" promptText="Selling Price"/>
+                    <TextField fx:id="tdComulativePriceField" promptText="Cumulative Price"/>
+                    <Button fx:id="addTransactionDetailButton" text="Add Detail" onAction="#addTransactionDetail"/>
+                    <Button fx:id="deleteTransactionDetailButton" text="Delete Detail" onAction="#deleteTransactionDetail"/>
+                </HBox>
+            </VBox>
+        </content>
+    </TitledPane>
+
+    <!-- Payment Section -->
+    <TitledPane text="Payments" expanded="true">
+        <content>
+            <VBox spacing="10">
+                <TableView fx:id="paymentTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="pIdColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="pAmountColumn" text="Amount" prefWidth="100"/>
+                        <TableColumn fx:id="pDateColumn" text="Payment Date" prefWidth="150"/>
+                        <TableColumn fx:id="pTypeColumn" text="Payment Type" prefWidth="100"/>
+                        <TableColumn fx:id="pWayColumn" text="Payment Way" prefWidth="100"/>
+                    </columns>
+                </TableView>
+                <HBox spacing="10">
+                    <TextField fx:id="pAmountField" promptText="Amount"/>
+                    <TextField fx:id="pTypeField" promptText="Type"/>
+                    <TextField fx:id="pWayField" promptText="Way"/>
+                    <Button fx:id="addPaymentButton" text="Add Payment" onAction="#addPayment"/>
+                    <Button fx:id="deletePaymentButton" text="Delete Payment" onAction="#deletePayment"/>
+                </HBox>
+            </VBox>
+        </content>
+    </TitledPane>
+
+</VBox>

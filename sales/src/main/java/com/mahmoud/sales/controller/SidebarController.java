@@ -129,7 +129,7 @@ public class SidebarController {
 
     @FXML
     public void onSalesButtonClick() {
-        setView("Transaction.fxml");  // Load Sales view
+        setView("SalesForm.fxml");  // Load Sales view
     }
 
     @FXML

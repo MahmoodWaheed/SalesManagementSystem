@@ -64,6 +64,7 @@ public class PersonService {
         // Calculate the remaining balance
         return transactionAmount.subtract(paymentAmount);
     }
-
-
+    public List<Person> findByType(String type) {
+        return personRepository.findByType(type);
+    }
 }

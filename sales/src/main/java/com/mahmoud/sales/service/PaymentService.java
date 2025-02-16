@@ -29,4 +29,8 @@ public class PaymentService {
     public void deletePayment(Integer id) {
         paymentRepository.deleteById(id);
     }
+    // New method to find payments by transaction ID
+    public List<Payment> findPaymentsByTransactionId(Integer transactionId) {
+        return paymentRepository.findByTransactionId(transactionId);
+    }
 }

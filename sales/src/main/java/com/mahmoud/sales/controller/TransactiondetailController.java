@@ -1,9 +1,11 @@
 package com.mahmoud.sales.controller;
 
+import com.mahmoud.sales.entity.Item;
 import com.mahmoud.sales.entity.Transactiondetail;
 import com.mahmoud.sales.service.PersonService;
 import com.mahmoud.sales.service.TransactiondetailService;
 import com.mahmoud.sales.util.SpringFXMLLoader;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,6 +35,8 @@ public class TransactiondetailController {
     private TableColumn<Transactiondetail, BigDecimal> comulativePriceColumn;
     @FXML
     private TableColumn<Transactiondetail, BigDecimal> priceColumn;
+    @FXML
+    private TableColumn<Transactiondetail, String> itemColumn;
 
     @FXML
     private TextField quantityField;
@@ -60,6 +64,11 @@ public class TransactiondetailController {
         sellingPriceColumn.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
         comulativePriceColumn.setCellValueFactory(new PropertyValueFactory<>("comulativePrice"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        // Add this configuration for itemColumn
+        itemColumn.setCellValueFactory(cellData -> {
+            Item item = cellData.getValue().getItem();
+            return new SimpleStringProperty(item != null ? item.getName() : "");
+        });
 
         // Load all transaction details and display them
         loadTransactionDetails();

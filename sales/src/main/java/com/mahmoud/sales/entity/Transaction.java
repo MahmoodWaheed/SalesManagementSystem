@@ -37,6 +37,11 @@ public class Transaction {
     @JoinColumn(name = "Person_id", nullable = false)
     private Person person;
 
+    // Updated field to use the TransactionType enum.
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_type", length = 45)
+    private TransactionType transactionType;
+
     @Column(name = "note", length = 45)
     private String note;
 

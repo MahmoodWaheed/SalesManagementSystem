@@ -29,4 +29,8 @@ public class TransactiondetailService {
     public void deleteTransactionDetail(Integer id) {
         transactiondetailRepository.deleteById(id);
     }
+    // New method to find transaction details by transaction ID
+    public List<Transactiondetail> findTransactionDetailsByTransactionId(Integer transactionId) {
+        return transactiondetailRepository.findByTransaction_Id(transactionId);
+    }
 }
