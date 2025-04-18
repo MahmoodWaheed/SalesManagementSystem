@@ -84,6 +84,7 @@ public class SalesFormController {
     private Button deleteTransactionDetailButton; // Button to delete selected detail
 
     /** ********** Payment Section ********** */
+
     @FXML
     private TableView<Payment> paymentTable; // Table to display payments
     @FXML
