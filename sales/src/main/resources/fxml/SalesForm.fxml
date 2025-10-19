@@ -26,6 +26,7 @@
                     <!-- ComboBox for selecting a Customer -->
                     <Label text="Customer:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                     <ComboBox fx:id="customerComboBox" promptText="Select Customer"
+                              editable="true"
                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
                     <!-- ComboBox for selecting an Employee -->
@@ -47,6 +48,8 @@
                     <Button fx:id="saveTransactionButton" text="Save Transaction"
                             onAction="#onSaveTransaction"
                             GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Button text="Preview Invoice" onAction="#onPreviewInvoice" fx:id="previewInvoiceButton"/>
+
                 </children>
             </GridPane>
         </content>

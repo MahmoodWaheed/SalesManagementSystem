@@ -1,0 +1,52 @@
+.invoice-header {
+    -fx-background-color: white;
+    -fx-padding: 12 18 12 18;
+    -fx-border-color: transparent transparent #ddd transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.company-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.company-address {
+    -fx-font-size: 11px;
+    -fx-text-fill: #444;
+}
+
+.invoice-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.invoice-meta {
+    -fx-font-size: 12px;
+}
+
+.section-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+}
+
+.invoice-table .table-header-row {
+    -fx-background-color: #f4f4f4;
+}
+
+.totals-box {
+    -fx-padding: 10;
+    -fx-border-color: #eee;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+}
+
+.grand-total-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.grand-total-value {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}

@@ -28,6 +28,13 @@ public class TransactiondetailId implements java.io.Serializable {
                 Objects.equals(this.transactionId, entity.transactionId);
     }
 
+    public TransactiondetailId() {}
+
+    public TransactiondetailId(Integer id, Integer transactionId) {
+        this.id = id;
+        this.transactionId = transactionId;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, transactionId);

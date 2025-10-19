@@ -45,15 +45,23 @@ public class Transaction {
     @Column(name = "note", length = 45)
     private String note;
 
-    @OneToMany(mappedBy = "transaction")
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Payment> payments = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "transaction")
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Transactiondetail> transactiondetails = new LinkedHashSet<>();
 
     public void setAmount(BigDecimal amount) {
     }
 
     public void setTransactionType(String transactionType) {
+    }
+    // remove stale stub methods and implement correctly:
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 }

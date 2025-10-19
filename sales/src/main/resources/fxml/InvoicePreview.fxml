@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mahmoud.sales.controller.InvoicePreviewController"
+            stylesheets="@../css/invoice.css">
+
+    <!-- Top: Company header -->
+    <top>
+        <HBox styleClass="invoice-header" spacing="10" padding="20">
+            <children>
+                <ImageView fx:id="companyLogo" fitHeight="60" fitWidth="60" pickOnBounds="true" preserveRatio="true"/>
+                <VBox spacing="2">
+                    <Label text="شركة المثال لتجارة الإلكترونيات" styleClass="company-name"/>
+                    <Label text="العنوان: القاهرة، مصر - شارع المثال 123" styleClass="company-address"/>
+                    <Label text="هاتف: +20 10 0000 0000  - بريــــد: info@example.com" styleClass="company-address"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox alignment="TOP_RIGHT">
+                    <Label text="فاتورة بيع" styleClass="invoice-title"/>
+                    <HBox spacing="5">
+                        <Label text="رقم الفاتورة:"/>
+                        <Label fx:id="lblInvoiceNumber" styleClass="invoice-meta"/>
+                    </HBox>
+                    <HBox spacing="5">
+                        <Label text="التاريخ:"/>
+                        <Label fx:id="lblInvoiceDate" styleClass="invoice-meta"/>
+                    </HBox>
+                </VBox>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Center: invoice body -->
+    <center>
+        <VBox spacing="10" padding="16">
+            <!-- Header: Customer & Employee -->
+            <GridPane hgap="20" vgap="6">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+
+                <!-- Customer block -->
+                <Label text="المشتري (العميل):" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="section-title"/>
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="2">
+                    <Label fx:id="lblCustomerName" />
+                    <Label fx:id="lblCustomerLocation"/>
+                    <Label fx:id="lblCustomerOpenBalance"/>
+                </VBox>
+
+                <!-- Sales rep block -->
+                <Label text="مندوب المبيعات:" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="section-title"/>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="2">
+                    <Label fx:id="lblEmployeeName"/>
+                    <Label fx:id="lblEmployeeRole"/>
+                </VBox>
+            </GridPane>
+
+            <!-- Items table -->
+            <TableView fx:id="tblDetails" prefHeight="240" VBox.vgrow="ALWAYS" styleClass="invoice-table">
+                <columns>
+                    <TableColumn fx:id="colItem" text="الصنف" prefWidth="220"/>
+                    <TableColumn fx:id="colQty" text="الكمية" prefWidth="80"/>
+                    <TableColumn fx:id="colUnitPrice" text="سعر الوحدة" prefWidth="120"/>
+                    <TableColumn fx:id="colLineTotal" text="الإجمالي" prefWidth="140"/>
+                </columns>
+            </TableView>
+
+            <!-- Totals & payments -->
+            <HBox spacing="20">
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox spacing="6" styleClass="totals-box">
+                    <HBox spacing="16">
+                        <Label text="المجموع الفرعي:"/>
+                        <Label fx:id="lblSubTotal"/>
+                    </HBox>
+                    <HBox spacing="16">
+                        <Label text="الضريبة (٪):"/>
+                        <Label fx:id="lblTax"/>
+                    </HBox>
+                    <HBox spacing="16">
+                        <Label text="الإجمالي الكلي:" styleClass="grand-total-label"/>
+                        <Label fx:id="lblGrandTotal" styleClass="grand-total-value"/>
+                    </HBox>
+
+                    <Separator/>
+
+                    <Label text="الدفعات:" styleClass="section-title"/>
+                    <TableView fx:id="tblPayments" prefHeight="120">
+                        <columns>
+                            <TableColumn fx:id="colPayType" text="نوع الدفع" prefWidth="120"/>
+                            <TableColumn fx:id="colPayAmount" text="المبلغ" prefWidth="120"/>
+                            <TableColumn fx:id="colPayDate" text="التاريخ" prefWidth="160"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- Bottom: Actions -->
+    <bottom>
+        <HBox spacing="10" padding="12" alignment="CENTER_RIGHT">
+            <children>
+                <Button text="طباعة" onAction="#onPrint"/>
+                <Button text="إغلاق" onAction="#onClose"/>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

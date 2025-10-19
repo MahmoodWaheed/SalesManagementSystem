@@ -74,7 +74,7 @@ public class TransactionController {
         String transactionType = transactionTypeField.getText();
 
         Transaction transaction = new Transaction();
-        transaction.setAmount(amount);
+        transaction.setTotalAmount(amount);
         transaction.setTransactionType(transactionType);
         transaction.setTransactionDate(Instant.now());
 
