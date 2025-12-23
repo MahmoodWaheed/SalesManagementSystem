@@ -5,10 +5,9 @@ import com.mahmoud.sales.entity.Transaction;
 import com.mahmoud.sales.entity.Transactiondetail;
 import com.mahmoud.sales.service.InvoiceService;
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.print.*;
+import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -16,10 +15,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.NumberFormat;
-import java.time.*;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -55,12 +55,10 @@ public class InvoicePreviewController {
 
     private final InvoiceService invoiceService;
 
-    // Formatting
-    private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("ar", "EG"));
+    private final NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("ar","EG"));
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
             .withZone(ZoneId.systemDefault());
 
-    // current shown transaction
     private Transaction transaction;
 
     public InvoicePreviewController(InvoiceService invoiceService) {
@@ -69,35 +67,29 @@ public class InvoicePreviewController {
 
     @FXML
     public void initialize() {
-        // set logo if exists in resources
+        // load optional logo
         try {
             URL logoUrl = getClass().getResource("/images/company-logo.png");
             if (logoUrl != null) {
                 companyLogo.setImage(new Image(logoUrl.toExternalForm()));
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignore) {}
 
-        // Table columns mapping
-        colItem.setCellValueFactory(cell -> javafx.beans.binding.Bindings.createStringBinding(
-                () -> cell.getValue().getItem() == null ? "" : cell.getValue().getItem().getName()));
+        // cell value factories (use ReadOnlyObjectWrapper via constructor)
+        colItem.setCellValueFactory(cell -> new javafx.beans.property.ReadOnlyObjectWrapper<>(
+                cell.getValue().getItem() == null ? "" : cell.getValue().getItem().getName()
+        ));
+        colQty.setCellValueFactory(cell -> new javafx.beans.property.ReadOnlyObjectWrapper<>(
+                cell.getValue().getQuantity()
+        ));
+        colUnitPrice.setCellValueFactory(cell -> new javafx.beans.property.ReadOnlyObjectWrapper<>(
+                cell.getValue().getSellingPrice()
+        ));
+        colLineTotal.setCellValueFactory(cell -> new javafx.beans.property.ReadOnlyObjectWrapper<>(
+                cell.getValue().getComulativePrice()
+        ));
 
-        colQty.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().getQuantity()));
-
-
-        colUnitPrice.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().getSellingPrice()));
-
-        colLineTotal.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().getComulativePrice()));
-
-        // Payments columns
-        colPayType.setCellValueFactory(cell -> javafx.beans.binding.Bindings.createStringBinding(
-                () -> cell.getValue().getPaymentType()));
-
-        colPayAmount.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().getAmount()));
-
-        colPayDate.setCellValueFactory(cell -> javafx.beans.binding.Bindings.createStringBinding(
-                () -> dateFormatter.format(cell.getValue().getPaymentDate())));
-
-        // Set table cell factories to show nicely formatted numbers
+        // formatting cell factories for money
         colUnitPrice.setCellFactory(col -> new TableCell<>() {
             @Override protected void updateItem(BigDecimal price, boolean empty) {
                 super.updateItem(price, empty);
@@ -110,74 +102,75 @@ public class InvoicePreviewController {
                 setText(empty || val == null ? "" : currencyFormat.format(val));
             }
         });
+
+        colPayAmount.setCellValueFactory(c -> new javafx.beans.property.ReadOnlyObjectWrapper<>(c.getValue().getAmount()));
         colPayAmount.setCellFactory(col -> new TableCell<>() {
             @Override protected void updateItem(BigDecimal val, boolean empty) {
                 super.updateItem(val, empty);
                 setText(empty || val == null ? "" : currencyFormat.format(val));
             }
         });
+
+        colPayType.setCellValueFactory(c -> new javafx.beans.property.ReadOnlyObjectWrapper<>(c.getValue().getPaymentType()));
+        colPayDate.setCellValueFactory(c -> new javafx.beans.property.ReadOnlyObjectWrapper<>(
+                c.getValue().getPaymentDate() == null ? "" : dateFormatter.format(c.getValue().getPaymentDate())
+        ));
     }
 
     /**
-     * Called externally after FXML load to set which transaction to show.
+     * Called to pass a transaction reference (from SalesFormController).
+     * We reload full invoice data inside the service to avoid lazy-init problems.
      */
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
-        loadAndRender();
+        Platform.runLater(this::loadAndRender);
     }
 
     private void loadAndRender() {
-        if (transaction == null) return;
+        if (this.transaction == null) return;
 
-        // Load fresh data via the service to ensure relationships are initialized
-        var invoiceData = invoiceService.prepareInvoice(transaction.getId());
+        InvoiceService.InvoiceData data = invoiceService.prepareInvoice(this.transaction.getId());
 
-        // Header
-        lblInvoiceNumber.setText(String.valueOf(invoiceData.getTransaction().getId()));
-        lblInvoiceDate.setText(dateFormatter.format(invoiceData.getTransaction().getTransactionDate()));
+        lblInvoiceNumber.setText(String.valueOf(data.getTransaction().getId()));
+        lblInvoiceDate.setText(data.getTransaction().getTransactionDate() == null ? ""
+                : dateFormatter.format(data.getTransaction().getTransactionDate()));
 
-        // Customer & employee
-        if (invoiceData.getTransaction().getPerson() != null) {
-            lblCustomerName.setText(invoiceData.getTransaction().getPerson().getName());
-            lblCustomerLocation.setText(invoiceData.getTransaction().getPerson().getLocation() == null ? "" :
-                    invoiceData.getTransaction().getPerson().getLocation());
+        if (data.getTransaction().getPerson() != null) {
+            lblCustomerName.setText(data.getTransaction().getPerson().getName());
+            lblCustomerLocation.setText(data.getTransaction().getPerson().getLocation() == null ? "" :
+                    data.getTransaction().getPerson().getLocation());
             lblCustomerOpenBalance.setText("رصيد سابق: " + currencyFormat.format(
-                    invoiceData.getTransaction().getPerson().getOpenBalance() == null ?
-                            BigDecimal.ZERO : invoiceData.getTransaction().getPerson().getOpenBalance()));
-        }
-        if (invoiceData.getTransaction().getSalesRep() != null) {
-            lblEmployeeName.setText(invoiceData.getTransaction().getSalesRep().getName());
-            lblEmployeeRole.setText(invoiceData.getTransaction().getSalesRep().getRole());
+                    data.getTransaction().getPerson().getOpenBalance() == null ?
+                            BigDecimal.ZERO : data.getTransaction().getPerson().getOpenBalance()));
         }
 
-        // Table of details
-        List<Transactiondetail> details = invoiceData.getDetails();
+        if (data.getTransaction().getSalesRep() != null) {
+            lblEmployeeName.setText(data.getTransaction().getSalesRep().getName());
+            lblEmployeeRole.setText(data.getTransaction().getSalesRep().getRole());
+        }
+
+        List<Transactiondetail> details = data.getDetails();
         tblDetails.setItems(FXCollections.observableArrayList(details));
 
-        // Totals
-        lblSubTotal.setText(currencyFormat.format(invoiceData.getSubTotal()));
-        lblTax.setText(currencyFormat.format(invoiceData.getTaxAmount()) + " (٪" + invoiceData.getTaxPercent() + ")");
-        lblGrandTotal.setText(currencyFormat.format(invoiceData.getGrandTotal()));
+        lblSubTotal.setText(currencyFormat.format(data.getSubTotal()));
+        lblTax.setText(currencyFormat.format(data.getTaxAmount()) + " (٪" + data.getTaxPercent() + ")");
+        lblGrandTotal.setText(currencyFormat.format(data.getGrandTotal()));
 
-        // Payments
-        List<Payment> payments = invoiceData.getPayments();
-        tblPayments.setItems(FXCollections.observableArrayList(payments));
+        tblPayments.setItems(FXCollections.observableArrayList(data.getPayments()));
     }
 
     @FXML
     public void onPrint() {
-        // Basic JavaFX printing: use PrinterJob
         PrinterJob job = PrinterJob.createPrinterJob();
         if (job != null && job.showPrintDialog(tblDetails.getScene().getWindow())) {
-            Node printable = tblDetails.getScene().getRoot();
-            boolean success = job.printPage(printable);
+            Node root = tblDetails.getScene().getRoot();
+            boolean success = job.printPage(root);
             if (success) job.endJob();
         }
     }
 
     @FXML
     public void onClose() {
-        // close the Stage
         Stage stage = (Stage) lblInvoiceNumber.getScene().getWindow();
         stage.close();
     }

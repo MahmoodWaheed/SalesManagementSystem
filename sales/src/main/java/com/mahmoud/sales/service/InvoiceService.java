@@ -11,10 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Service preparing invoice DTO-like data for the UI.
+ * Prepare invoice data for a given transaction.
  */
 @Service
 public class InvoiceService {
@@ -67,24 +66,21 @@ public class InvoiceService {
 
     /**
      * Load full invoice data for a transaction id.
-     * This ensures related collections are loaded within a transactional context.
+     * Uses transactional read-only context to allow lazy init.
      */
     @Transactional(readOnly = true)
     public InvoiceData prepareInvoice(Integer transactionId) {
         Transaction tx = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new IllegalArgumentException("Transaction not found: " + transactionId));
 
-        // Load details & payments
         List<Transactiondetail> details = detailRepository.findByTransactionId(tx.getId());
         List<Payment> payments = paymentRepository.findByTransactionId(tx.getId());
 
-        // compute subtotal and tax (example: tax 14% if you want)
         BigDecimal subTotal = details.stream()
                 .map(d -> d.getComulativePrice() == null ? BigDecimal.ZERO : d.getComulativePrice())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal taxPercent = BigDecimal.valueOf(0); // default 0%
-        // If you want 14% tax set taxPercent = BigDecimal.valueOf(14);
+        BigDecimal taxPercent = BigDecimal.ZERO; // change to desired percent if needed
         BigDecimal taxAmount = subTotal.multiply(taxPercent).divide(BigDecimal.valueOf(100));
         BigDecimal grandTotal = subTotal.add(taxAmount);
 

@@ -50,3 +50,10 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
+.invoice-header { -fx-padding: 12; -fx-border-color: #ddd; -fx-border-width: 0 0 1 0; }
+.company-name { -fx-font-size: 16px; -fx-font-weight: bold; }
+.company-address { -fx-font-size: 11px; -fx-text-fill: #444; }
+.invoice-title { -fx-font-size: 18px; -fx-font-weight: bold; }
+.section-title { -fx-font-weight: bold; -fx-font-size: 13px; }
+.grand-total-label { -fx-font-size: 14px; -fx-font-weight: bold; }
+.grand-total-value { -fx-font-size: 14px; -fx-font-weight: bold; }

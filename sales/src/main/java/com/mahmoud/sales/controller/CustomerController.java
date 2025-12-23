@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @Controller
 public class CustomerController {
 
-
     @Autowired
     private  PersonService personService;
     @FXML
@@ -253,8 +252,6 @@ public class CustomerController {
                 .filter(person -> "Customer".equals(person.getType()))
                 .toList();
 
-
-
         // Update the customer count and total open balance
         int customerCount = customers.size();
         BigDecimal totalBalance = customers.stream()
@@ -271,26 +268,6 @@ public class CustomerController {
         customerCountLabel.setText("Number of Customers: " + customerCount);
         totalOpenBalanceLabel.setText("Total Open Balance: " + totalBalance);
         totalBalanceLabel.setText(": أجمالى المديونية" +totalBalanceAll);
-
-//        // Fetch transaction details (transaction amount, payment amount, balance) for each customer
-//        List<Object[]> transactionDetails = personService.getPersonRemainingBalance();
-//
-//        // Combine the transaction details with the customers
-//        for (Object[] detail : transactionDetails) {
-//            Integer personId = (Integer) detail[0];
-//            BigDecimal transactionAmount = (BigDecimal) detail[1];
-//            BigDecimal paymentAmount = (BigDecimal) detail[2];
-//            BigDecimal balance = (BigDecimal) detail[3];
-//
-//            // Find the corresponding customer in the list and set the values
-//            customers.stream()
-//                    .filter(person -> person.getId().equals(personId))
-//                    .forEach(person -> {
-//                        person.setTransactionAmount(transactionAmount);
-//                        person.setPaymentAmount(paymentAmount);
-//                        person.setBalance(balance);
-//                    });
-//        }
 
         ObservableList<Person> customerData = FXCollections.observableArrayList(customers);
         personTable.setItems(customerData);
