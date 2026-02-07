@@ -1,0 +1,371 @@
+/* ═══════════════════════════════════════════════════════════════ */
+/*              CUSTOMER TRANSACTION HISTORY REPORT                 */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ===== ROOT ===== */
+.report-root {
+    -fx-background-color: #f5f7fa;
+    -fx-font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
+}
+
+/* ===== HEADER SECTION ===== */
+.report-header {
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f8f9fb 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 3);
+}
+
+.report-title {
+    -fx-text-fill: #1a202c;
+    -fx-font-weight: bold;
+}
+
+.header-separator {
+    -fx-background-color: linear-gradient(to right, transparent, #cbd5e0, transparent);
+    -fx-padding: 1 0 1 0;
+}
+
+/* ===== FILTER SECTION ===== */
+.filter-section {
+    -fx-background-color: #f7fafc;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.filter-label {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.filter-combo,
+.filter-date {
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+    -fx-padding: 10;
+}
+
+.filter-combo:focused,
+.filter-date:focused {
+    -fx-border-color: #4299e1;
+    -fx-background-color: #ebf8ff;
+    -fx-effect: dropshadow(gaussian, rgba(66, 153, 225, 0.3), 10, 0, 0, 0);
+}
+
+/* ===== BUTTONS ===== */
+.btn-generate {
+    -fx-background-color: linear-gradient(to bottom, #48bb78 0%, #38a169 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-padding: 12 28 12 28;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.4), 10, 0, 0, 3);
+}
+
+.btn-generate:hover {
+    -fx-background-color: linear-gradient(to bottom, #38a169 0%, #2f855a 100%);
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.6), 12, 0, 0, 4);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.btn-clear {
+    -fx-background-color: linear-gradient(to bottom, #a0aec0 0%, #718096 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-padding: 12 28 12 28;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-clear:hover {
+    -fx-background-color: linear-gradient(to bottom, #718096 0%, #4a5568 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.btn-print {
+    -fx-background-color: linear-gradient(to bottom, #9f7aea 0%, #805ad5 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-print:hover {
+    -fx-background-color: linear-gradient(to bottom, #805ad5 0%, #6b46c1 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.btn-export {
+    -fx-background-color: linear-gradient(to bottom, #ed8936 0%, #dd6b20 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-export:hover {
+    -fx-background-color: linear-gradient(to bottom, #dd6b20 0%, #c05621 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.btn-close {
+    -fx-background-color: linear-gradient(to bottom, #fc8181 0%, #f56565 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-close:hover {
+    -fx-background-color: linear-gradient(to bottom, #f56565 0%, #e53e3e 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+/* ===== SCROLL PANE ===== */
+.report-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.report-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.report-content {
+    -fx-background-color: transparent;
+}
+
+/* ===== INFO CARD ===== */
+.info-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 25;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.section-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-weight: bold;
+}
+
+.info-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 0.5;
+}
+
+.info-value {
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.info-subtitle {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+/* ===== SUMMARY CARDS ===== */
+.summary-cards {
+    -fx-padding: 0;
+}
+
+.summary-card {
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 12, 0, 0, 3);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.summary-card-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #718096;
+    -fx-letter-spacing: 0.5;
+}
+
+.summary-card-value {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.summary-card-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #a0aec0;
+}
+
+/* Opening Balance Card - Blue */
+.opening-balance {
+    -fx-background-color: linear-gradient(to bottom, #ebf8ff 0%, #bee3f8 100%);
+    -fx-border-color: #4299e1;
+}
+
+.opening-balance .summary-card-value {
+    -fx-text-fill: #2c5282;
+}
+
+/* Total Transactions Card - Green */
+.total-transactions {
+    -fx-background-color: linear-gradient(to bottom, #f0fff4 0%, #c6f6d5 100%);
+    -fx-border-color: #48bb78;
+}
+
+.total-transactions .summary-card-value {
+    -fx-text-fill: #22543d;
+}
+
+/* Total Payments Card - Purple */
+.total-payments {
+    -fx-background-color: linear-gradient(to bottom, #faf5ff 0%, #e9d8fd 100%);
+    -fx-border-color: #9f7aea;
+}
+
+.total-payments .summary-card-value {
+    -fx-text-fill: #553c9a;
+}
+
+/* Current Balance Card - Orange/Yellow */
+.current-balance {
+    -fx-background-color: linear-gradient(to bottom, #fffaf0 0%, #feebc8 100%);
+    -fx-border-color: #ed8936;
+}
+
+.current-balance .summary-card-value {
+    -fx-text-fill: #7c2d12;
+}
+
+/* ===== DATA CARD ===== */
+.data-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 25;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+/* ===== REPORT TABLE ===== */
+.report-table {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.report-table .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #f7fafc 0%, #edf2f7 100%);
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 0 0 2 0;
+}
+
+.report-table .column-header {
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #2d3748;
+    -fx-padding: 12 8 12 8;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.report-table .column-header .label {
+    -fx-text-fill: #2d3748;
+    -fx-font-weight: 700;
+}
+
+.report-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #f0f4f8 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.report-table .table-row-cell:odd {
+    -fx-background-color: #fafafa;
+}
+
+.report-table .table-row-cell:selected {
+    -fx-background-color: #ebf8ff;
+    -fx-text-fill: #2c5282;
+    -fx-border-color: #4299e1;
+    -fx-border-width: 0 0 2 0;
+}
+
+.report-table .table-row-cell:hover {
+    -fx-background-color: #f0f9ff;
+}
+
+.report-table .table-cell {
+    -fx-padding: 10 8 10 8;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2d3748;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.report-table .table-cell:selected {
+    -fx-text-fill: #1a365d;
+}
+
+/* ===== TABLE PLACEHOLDER ===== */
+.table-placeholder {
+    -fx-padding: 40;
+}
+
+.placeholder-title {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.placeholder-text {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.report-table .scroll-bar:vertical,
+.report-table .scroll-bar:horizontal {
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 6;
+}
+
+.report-table .scroll-bar .thumb {
+    -fx-background-color: #cbd5e0;
+    -fx-background-radius: 6;
+}
+
+.report-table .scroll-bar .thumb:hover {
+    -fx-background-color: #a0aec0;
+}
+
+.report-table .scroll-bar .increment-button,
+.report-table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}

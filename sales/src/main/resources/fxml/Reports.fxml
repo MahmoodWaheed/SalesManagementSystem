@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mahmoud.sales.controller.ReportsMenuController"
+            styleClass="reports-root"
+            stylesheets="@../css/reportsmenu.css">
+
+    <!-- TOP: Header -->
+    <top>
+        <VBox styleClass="reports-header">
+            <padding>
+                <Insets top="25" right="30" bottom="25" left="30"/>
+            </padding>
+
+            <Label text="📊 Reports Dashboard" styleClass="reports-title">
+                <font>
+                    <Font name="System Bold" size="28"/>
+                </font>
+            </Label>
+
+            <Label text="Select a report category to begin" styleClass="reports-subtitle">
+                <VBox.margin>
+                    <Insets top="8"/>
+                </VBox.margin>
+            </Label>
+
+            <Separator styleClass="header-separator">
+                <VBox.margin>
+                    <Insets top="15" bottom="0"/>
+                </VBox.margin>
+            </Separator>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Report Categories -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="reports-scroll">
+            <GridPane hgap="25" vgap="25" styleClass="categories-grid">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30"/>
+                </padding>
+
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33.33"/>
+                    <ColumnConstraints percentWidth="33.33"/>
+                    <ColumnConstraints percentWidth="33.33"/>
+                </columnConstraints>
+
+                <!-- Customer Reports Card -->
+                <VBox styleClass="category-card customer-card"
+                      onMouseClicked="#onCustomerReportsClick"
+                      GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="👥" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Customer Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Transaction history, balances, and customer analytics"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="1 Report" styleClass="report-badge"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Supplier Reports Card -->
+                <VBox styleClass="category-card supplier-card"
+                      onMouseClicked="#onSupplierReportsClick"
+                      GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="🏭" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Supplier Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Purchase tracking and supplier performance"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Treasury Reports Card -->
+                <VBox styleClass="category-card treasury-card"
+                      onMouseClicked="#onTreasuryReportsClick"
+                      GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="💰" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Treasury Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Cash flow, payments, and financial summaries"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Inventory Reports Card -->
+                <VBox styleClass="category-card inventory-card"
+                      onMouseClicked="#onInventoryReportsClick"
+                      GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="📦" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Inventory Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Stock levels, movement, and valuation"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Sales Reports Card -->
+                <VBox styleClass="category-card sales-card"
+                      onMouseClicked="#onSalesReportsClick"
+                      GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="📈" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Sales Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Performance, revenue trends, and analytics"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                    </VBox>
+                </VBox>
+
+
+
+                <!-- Custom Reports Card -->
+                <VBox styleClass="category-card custom-card"
+                      onMouseClicked="#onCustomReportsClick"
+                      GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="⚙️" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Custom Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Build custom reports with flexible filters"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                    </VBox>
+                </VBox>
+
+                <!-- Purchase Reports Card -->
+                <VBox styleClass="category-card sales-card"
+                      onMouseClicked="#onPurchaseReportsClick"
+                      GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <padding>
+                        <Insets top="30" right="25" bottom="30" left="25"/>
+                    </padding>
+
+                    <VBox spacing="15" alignment="CENTER">
+                        <Label text="📈" styleClass="category-icon">
+                            <font>
+                                <Font size="56"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Purchase Reports" styleClass="category-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Performance, revenue trends, and analytics"
+                               styleClass="category-description"
+                               wrapText="true"
+                               textAlignment="CENTER"
+                               maxWidth="250"/>
+
+                        <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                    </VBox>
+                </VBox>
+
+            </GridPane>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

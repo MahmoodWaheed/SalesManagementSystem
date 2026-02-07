@@ -1,0 +1,255 @@
+/* ═══════════════════════════════════════════════════════════════ */
+/*                    REPORTS MENU - MODERN DESIGN                  */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ===== ROOT & GENERAL ===== */
+.reports-root, .submenu-root {
+    -fx-background-color: #f0f4f8;
+    -fx-font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
+}
+
+/* ===== HEADER SECTION ===== */
+.reports-header {
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);
+}
+
+.reports-title {
+    -fx-text-fill: #1a202c;
+    -fx-font-weight: bold;
+}
+
+.reports-subtitle {
+    -fx-text-fill: #718096;
+    -fx-font-size: 14px;
+}
+
+.header-separator {
+    -fx-background-color: linear-gradient(to right, transparent, #cbd5e0, transparent);
+    -fx-padding: 1 0 1 0;
+}
+
+/* ===== SCROLL PANE ===== */
+.reports-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.reports-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ===== CATEGORY CARDS ===== */
+.categories-grid {
+    -fx-background-color: transparent;
+}
+
+.category-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);
+    -fx-cursor: hand;
+    -fx-min-height: 280;
+}
+
+.category-card:hover {
+    -fx-border-width: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);
+    -fx-scale-y: 1.02;
+    -fx-scale-x: 1.02;
+}
+
+/* Customer Card - Blue Theme */
+.customer-card {
+    -fx-border-color: #4299e1;
+}
+
+.customer-card:hover {
+    -fx-border-color: #3182ce;
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #ebf8ff 100%);
+}
+
+/* Supplier Card - Purple Theme */
+.supplier-card {
+    -fx-border-color: #9f7aea;
+}
+
+.supplier-card:hover {
+    -fx-border-color: #805ad5;
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f3ebff 100%);
+}
+
+/* Treasury Card - Green Theme */
+.treasury-card {
+    -fx-border-color: #48bb78;
+}
+
+.treasury-card:hover {
+    -fx-border-color: #38a169;
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f0fff4 100%);
+}
+
+/* Inventory Card - Orange Theme */
+.inventory-card {
+    -fx-border-color: #ed8936;
+}
+
+.inventory-card:hover {
+    -fx-border-color: #dd6b20;
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #fffaf0 100%);
+}
+
+/* Sales Card - Red Theme */
+.sales-card {
+    -fx-border-color: #f56565;
+}
+
+.sales-card:hover {
+    -fx-border-color: #e53e3e;
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #fff5f5 100%);
+}
+
+/* Custom Card - Gray Theme */
+.custom-card {
+    -fx-border-color: #718096;
+}
+
+.custom-card:hover {
+    -fx-border-color: #4a5568;
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f7fafc 100%);
+}
+
+/* ===== CARD CONTENT ===== */
+.category-icon {
+    -fx-text-fill: #4a5568;
+}
+
+.category-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-weight: bold;
+}
+
+.category-description {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 2;
+}
+
+/* ===== BADGES ===== */
+.report-badge {
+    -fx-background-color: #4299e1;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-padding: 6 16 6 16;
+    -fx-background-radius: 12;
+}
+
+.coming-soon-badge {
+    -fx-background-color: #edf2f7;
+    -fx-text-fill: #718096;
+    -fx-font-size: 11px;
+    -fx-font-weight: 600;
+    -fx-padding: 6 16 6 16;
+    -fx-background-radius: 12;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button {
+    -fx-background-color: linear-gradient(to bottom, #edf2f7 0%, #e2e8f0 100%);
+    -fx-text-fill: #4a5568;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.back-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #e2e8f0 0%, #cbd5e0 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.back-button:pressed {
+    -fx-background-color: #cbd5e0;
+    -fx-translate-y: 1;
+}
+
+/* ===== SUBMENU CONTENT ===== */
+.submenu-content {
+    -fx-background-color: transparent;
+}
+
+/* ===== REPORT ITEMS (List Style) ===== */
+.report-item {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+.report-item:hover {
+    -fx-border-color: #4299e1;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(66, 153, 225, 0.15), 12, 0, 0, 3);
+    -fx-background-color: linear-gradient(to right, #ffffff 0%, #ebf8ff 100%);
+}
+
+.report-item-disabled {
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+.report-item-disabled:hover {
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+    -fx-background-color: #ffffff;
+}
+
+.report-item-icon {
+    -fx-text-fill: #4299e1;
+}
+
+.report-item-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-weight: bold;
+}
+
+.report-item-description {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 1.5;
+}
+
+.report-item-arrow {
+    -fx-text-fill: #4299e1;
+    -fx-font-weight: bold;
+}
+
+/* ===== ANIMATIONS ===== */
+.category-card,
+.report-item,
+.back-button {
+    -fx-transition: all 0.2s ease;
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 1024px) {
+    .reports-title {
+        -fx-font-size: 24px;
+    }
+
+    .category-title {
+        -fx-font-size: 16px;
+    }
+}

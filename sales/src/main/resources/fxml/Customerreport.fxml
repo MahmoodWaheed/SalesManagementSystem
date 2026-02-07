@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mahmoud.sales.controller.CustomerReportController"
+            styleClass="report-root"
+            stylesheets="@../css/customerreport.css"
+            prefHeight="900.0" prefWidth="1400.0">
+
+    <!-- TOP: Report Header -->
+    <top>
+        <VBox styleClass="report-header">
+            <padding>
+                <Insets top="25" right="30" bottom="25" left="30"/>
+            </padding>
+
+            <!-- Title Row -->
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="📊 Customer Transaction History Report" styleClass="report-title">
+                    <font>
+                        <Font name="System Bold" size="28"/>
+                    </font>
+                </Label>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="printButton" text="🖨️ Print Report"
+                        onAction="#onPrintReport" styleClass="btn-print"/>
+                <Button fx:id="exportButton" text="📄 Export PDF"
+                        onAction="#onExportPDF" styleClass="btn-export"/>
+                <Button fx:id="closeButton" text="✖ Close"
+                        onAction="#onClose" styleClass="btn-close"/>
+            </HBox>
+
+            <Separator styleClass="header-separator">
+                <VBox.margin>
+                    <Insets top="15" bottom="15"/>
+                </VBox.margin>
+            </Separator>
+
+            <!-- Filters Row -->
+            <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-section">
+                <VBox spacing="8">
+                    <Label text="Customer:" styleClass="filter-label"/>
+                    <ComboBox fx:id="customerComboBox"
+                              promptText="Select Customer..."
+                              prefWidth="250"
+                              editable="true"
+                              styleClass="filter-combo"/>
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="From Date:" styleClass="filter-label"/>
+                    <DatePicker fx:id="startDatePicker"
+                                promptText="Start Date"
+                                prefWidth="150"
+                                styleClass="filter-date"/>
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="To Date:" styleClass="filter-label"/>
+                    <DatePicker fx:id="endDatePicker"
+                                promptText="End Date"
+                                prefWidth="150"
+                                styleClass="filter-date"/>
+                </VBox>
+
+                <VBox spacing="8" alignment="BOTTOM_LEFT">
+                    <Label text=" " styleClass="filter-label"/>
+                    <Button fx:id="generateButton" text="🔍 Generate Report"
+                            onAction="#onGenerateReport" styleClass="btn-generate"/>
+                </VBox>
+
+                <VBox spacing="8" alignment="BOTTOM_LEFT">
+                    <Label text=" " styleClass="filter-label"/>
+                    <Button fx:id="clearButton" text="🔄 Clear Filters"
+                            onAction="#onClearFilters" styleClass="btn-clear"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Report Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="report-scroll">
+            <VBox spacing="20" styleClass="report-content">
+                <padding>
+                    <Insets top="25" right="30" bottom="25" left="30"/>
+                </padding>
+
+                <!-- Customer Information Card -->
+                <VBox spacing="15" styleClass="info-card">
+                    <Label text="Customer Information" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+
+                    <GridPane hgap="30" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                        </columnConstraints>
+
+                        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="Customer Name:" styleClass="info-label"/>
+                            <Label fx:id="customerNameLabel" text="-" styleClass="info-value"/>
+                        </VBox>
+
+                        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label text="Customer ID:" styleClass="info-label"/>
+                            <Label fx:id="customerIdLabel" text="-" styleClass="info-value"/>
+                        </VBox>
+
+                        <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <Label text="Location:" styleClass="info-label"/>
+                            <Label fx:id="customerLocationLabel" text="-" styleClass="info-value"/>
+                        </VBox>
+
+                        <VBox spacing="5" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <Label text="Report Period:" styleClass="info-label"/>
+                            <Label fx:id="reportPeriodLabel" text="-" styleClass="info-value"/>
+                        </VBox>
+                    </GridPane>
+                </VBox>
+
+                <!-- Summary Cards Row -->
+                <HBox spacing="20" styleClass="summary-cards">
+                    <!-- Opening Balance Card -->
+                    <VBox spacing="10" styleClass="summary-card opening-balance" HBox.hgrow="ALWAYS">
+                        <Label text="Opening Balance" styleClass="summary-card-title"/>
+                        <Label fx:id="openingBalanceLabel" text="0.00 EGP" styleClass="summary-card-value"/>
+                        <Label text="Initial customer balance" styleClass="summary-card-subtitle"/>
+                    </VBox>
+
+                    <!-- Total Transactions Card -->
+                    <VBox spacing="10" styleClass="summary-card total-transactions" HBox.hgrow="ALWAYS">
+                        <Label text="Total Transactions" styleClass="summary-card-title"/>
+                        <Label fx:id="totalTransactionsLabel" text="0.00 EGP" styleClass="summary-card-value"/>
+                        <Label fx:id="transactionCountLabel" text="0 transactions" styleClass="summary-card-subtitle"/>
+                    </VBox>
+
+                    <!-- Total Payments Card -->
+                    <VBox spacing="10" styleClass="summary-card total-payments" HBox.hgrow="ALWAYS">
+                        <Label text="Total Payments" styleClass="summary-card-title"/>
+                        <Label fx:id="totalPaymentsLabel" text="0.00 EGP" styleClass="summary-card-value"/>
+                        <Label fx:id="paymentCountLabel" text="0 payments" styleClass="summary-card-subtitle"/>
+                    </VBox>
+
+                    <!-- Current Balance Card -->
+                    <VBox spacing="10" styleClass="summary-card current-balance" HBox.hgrow="ALWAYS">
+                        <Label text="Current Balance" styleClass="summary-card-title"/>
+                        <Label fx:id="currentBalanceLabel" text="0.00 EGP" styleClass="summary-card-value"/>
+                        <Label text="Outstanding amount" styleClass="summary-card-subtitle"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Transactions Table -->
+                <VBox spacing="15" styleClass="data-card">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Transaction History" styleClass="section-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="transactionsInfoLabel" text="(Showing 0 transactions)"
+                               styleClass="info-subtitle"/>
+                    </HBox>
+
+                    <TableView fx:id="transactionsTable"
+                               styleClass="report-table"
+                               minHeight="300"
+                               VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="txIdColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="txDateColumn" text="Date" prefWidth="140"/>
+                            <TableColumn fx:id="txTypeColumn" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="txSalesRepColumn" text="Sales Rep" prefWidth="150"/>
+                            <TableColumn fx:id="txAmountColumn" text="Amount" prefWidth="120"/>
+                            <TableColumn fx:id="txNoteColumn" text="Note" prefWidth="250"/>
+                        </columns>
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10" styleClass="table-placeholder">
+                                <Label text="📋 No transactions found" styleClass="placeholder-title"/>
+                                <Label text="Select a customer and date range, then click Generate Report"
+                                       styleClass="placeholder-text"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+                <!-- Payments Table -->
+                <VBox spacing="15" styleClass="data-card">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Payment History" styleClass="section-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="paymentsInfoLabel" text="(Showing 0 payments)"
+                               styleClass="info-subtitle"/>
+                    </HBox>
+
+                    <TableView fx:id="paymentsTable"
+                               styleClass="report-table"
+                               minHeight="250"
+                               VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="payIdColumn" text="ID" prefWidth="60"/>
+                            <TableColumn fx:id="payDateColumn" text="Date" prefWidth="140"/>
+                            <TableColumn fx:id="payAmountColumn" text="Amount" prefWidth="120"/>
+                            <TableColumn fx:id="payTypeColumn" text="Type" prefWidth="120"/>
+                            <TableColumn fx:id="payWayColumn" text="Payment Way" prefWidth="150"/>
+                            <TableColumn fx:id="payTransactionColumn" text="Transaction ID" prefWidth="100"/>
+                        </columns>
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10" styleClass="table-placeholder">
+                                <Label text="💳 No payments found" styleClass="placeholder-title"/>
+                                <Label text="No payments recorded for this period" styleClass="placeholder-text"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

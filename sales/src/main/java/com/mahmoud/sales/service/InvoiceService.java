@@ -67,21 +67,55 @@ public class InvoiceService {
     /**
      * Load full invoice data for a transaction id.
      * Uses transactional read-only context to allow lazy init.
+     * EAGERLY loads all relationships to avoid LazyInitializationException.
      */
     @Transactional(readOnly = true)
     public InvoiceData prepareInvoice(Integer transactionId) {
         Transaction tx = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new IllegalArgumentException("Transaction not found: " + transactionId));
 
-        List<Transactiondetail> details = detailRepository.findByTransactionId(tx.getId());
+        // Eagerly initialize lazy relationships
+        if (tx.getPerson() != null) {
+            // Force initialization of person
+            tx.getPerson().getName();
+            tx.getPerson().getLocation();
+            tx.getPerson().getOpenBalance();
+        }
+
+        if (tx.getSalesRep() != null) {
+            // Force initialization of employee
+            tx.getSalesRep().getName();
+            tx.getSalesRep().getRole();
+        }
+
+        // Load transaction details with items
+        List<Transactiondetail> details = detailRepository.findByTransaction_Id(tx.getId());
+
+        // Force initialization of items in details
+        for (Transactiondetail detail : details) {
+            if (detail.getItem() != null) {
+                detail.getItem().getName();
+                detail.getItem().getId();
+            }
+        }
+
+        // Load payments
         List<Payment> payments = paymentRepository.findByTransactionId(tx.getId());
 
+        // Force initialization of payment relationships
+        for (Payment payment : payments) {
+            if (payment.getPerson() != null) {
+                payment.getPerson().getName();
+            }
+        }
+
+        // Calculate totals
         BigDecimal subTotal = details.stream()
                 .map(d -> d.getComulativePrice() == null ? BigDecimal.ZERO : d.getComulativePrice())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal taxPercent = BigDecimal.ZERO; // change to desired percent if needed
-        BigDecimal taxAmount = subTotal.multiply(taxPercent).divide(BigDecimal.valueOf(100));
+        BigDecimal taxAmount = subTotal.multiply(taxPercent).divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_HALF_UP);
         BigDecimal grandTotal = subTotal.add(taxAmount);
 
         return new InvoiceData(tx, details, payments, subTotal, taxPercent, taxAmount, grandTotal);

@@ -12,10 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+
 @Controller
 @Component
-
-
 public class SidebarController {
     private ConfigurableApplicationContext context;
 
@@ -23,65 +22,47 @@ public class SidebarController {
     public AnchorPane contentPane;
     @FXML
     private Button dashboardButton;
-
     @FXML
     private Button customerButton;
-
     @FXML
     private Button supplierButton;
-
     @FXML
     private Button employeeButton;
-
     @FXML
     private Button reportsButton;
-
     @FXML
     private Button itemsButton;
-
     @FXML
     private Button salesButton;
-
     @FXML
     private Button purchaseButton;
-
     @FXML
     private Button storeButton;
-
     @FXML
     private Button settingButton;
-
     @FXML
     private Button logoutButton;
+
     @Autowired
     private PersonService personService;
-//    private void setView(String fxmlFile) {
-//        try {
-//            // Load the FXML file for the selected view
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile));
-//            Node node = loader.load();
-//
-//            // Get the controller for the loaded view
-//            Object controller = loader.getController();
-//
-////            // If the controller is an instance of PersonController, load person data
-////            if (controller instanceof CustomerController) {
-////                CustomerController personController = (CustomerController) controller;
-////                personController.loadPersons();  // Load person data into the table
-////            }
-//
-//            // Clear the existing content and add the new view
-//            contentPane.getChildren().setAll(node);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
+    /**
+     * Load a view into the content pane
+     */
     private void setView(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + fxmlFile));
             Node node = loader.load();
+
+            // Get the controller if it needs the contentPane reference
+            Object controller = loader.getController();
+
+            // If it's a submenu controller, pass the contentPane reference
+            if (controller instanceof CustomerReportsSubMenuController) {
+                ((CustomerReportsSubMenuController) controller).setContentPane(contentPane);
+            } else if (controller instanceof ReportsMenuController) {
+                ((ReportsMenuController) controller).setContentPane(contentPane);
+            }
 
             // Anchor the node to all sides of the contentPane
             AnchorPane.setTopAnchor(node, 0.0);
@@ -96,62 +77,56 @@ public class SidebarController {
         }
     }
 
-
-//    @FXML
-//    public void onDashboardButtonClick() {
-//        setView("dashboard.fxml");  // Load Dashboard view
-//    }
-
     @FXML
     public void onCustomerButtonClick() {
-        setView("Customer.fxml");  // Load Customer view
+        setView("Customer.fxml");
     }
 
     @FXML
     public void onSupplierButtonClick() {
-        setView("Supplier.fxml");  // Load Supplier view
+        setView("Supplier.fxml");
     }
 
     @FXML
     public void onEmployeeButtonClick() {
-        setView("Employee.fxml");  // Load Employee view
+        setView("Employee.fxml");
     }
 
+    /**
+     * UPDATED: Load the Reports Menu instead of going directly to CustomerReport
+     */
     @FXML
     public void onReportsButtonClick() {
-        setView("Reports.fxml");  // Load Reports view
+        setView("Reports.fxml");  // Load the main Reports menu
     }
 
     @FXML
     public void onItemsButtonClick() {
-        setView("Item.fxml");  // Load Items view
+        setView("Item.fxml");
     }
 
     @FXML
     public void onSalesButtonClick() {
-        setView("SalesForm.fxml");  // Load Sales view
+        setView("SalesForm.fxml");
     }
 
     @FXML
     public void onPurchaseButtonClick() {
-        setView("Purchase.fxml");  // Load Purchase view
+        setView("Purchase.fxml");
     }
 
     @FXML
     public void onStoreButtonClick() {
-        setView("Store.fxml");  // Load Store view
+        setView("Store.fxml");
     }
 
     @FXML
     public void onSettingButtonClick() {
-        setView("Setting.fxml");  // Load Setting view
+        setView("Setting.fxml");
     }
 
     @FXML
     public void onLogoutButtonClick() {
-        setView("Login.fxml");  // Load Login view
+        setView("Login.fxml");
     }
-
-
-    // Add similar methods for other buttons (Employee, Reports, Sales, etc.)
 }

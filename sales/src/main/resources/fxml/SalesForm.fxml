@@ -2,106 +2,288 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<?import javafx.util.converter.DoubleStringConverter?>
-<?import javafx.util.Callback?>
-<?import javafx.scene.control.cell.TextFieldTableCell?>
-<?import javafx.util.converter.DoubleStringConverter?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      xmlns:converter="javafx.util.converter"
-      fx:controller="com.mahmoud.sales.controller.SalesFormController"
-      spacing="10">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mahmoud.sales.controller.SalesFormController"
+            styleClass="root-pane"
+            stylesheets="@../css/salesform.css"
+            prefHeight="800.0" prefWidth="1200.0">
 
-    <!-- Transaction Header Section -->
-    <TitledPane text="Transaction Header" expanded="true">
-        <content>
-            <GridPane hgap="10" vgap="10">
-                <children>
-                    <!-- ComboBox for selecting a Customer -->
-                    <Label text="Customer:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                    <ComboBox fx:id="customerComboBox" promptText="Select Customer"
-                              editable="true"
-                              GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <!-- TOP: Header with Title, Invoice Number, and Action Buttons -->
+    <top>
+        <VBox styleClass="header-section">
+            <padding>
+                <Insets top="25" right="30" bottom="25" left="30"/>
+            </padding>
 
-                    <!-- ComboBox for selecting an Employee -->
-                    <Label text="Employee:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <ComboBox fx:id="employeeComboBox" promptText="Select Employee"
-                              GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <!-- Title Row -->
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label text="Sales Transaction" styleClass="page-title">
+                    <font>
+                        <Font name="System Bold" size="28"/>
+                    </font>
+                </Label>
 
-                    <!-- Total Amount (read-only or auto-updated) -->
-                    <Label text="Total Amount:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                    <TextField fx:id="totalAmountField" promptText="Auto-calculated"
-                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Region HBox.hgrow="ALWAYS"/>
 
-                    <!-- Transaction Type (if needed) -->
-                    <Label text="Transaction Type:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                    <TextField fx:id="transactionTypeField" promptText="Enter Transaction Type"
-                               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <!-- Current Invoice Display -->
+                <VBox alignment="CENTER" spacing="5" styleClass="invoice-display-box">
+                    <Label text="Invoice Number" styleClass="invoice-label-small"/>
+                    <Label fx:id="currentInvoiceLabel" text="NEW" styleClass="invoice-number-display">
+                        <font>
+                            <Font name="System Bold" size="20"/>
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
 
-                    <!-- Button to Save/Finish the Transaction -->
-                    <Button fx:id="saveTransactionButton" text="Save Transaction"
-                            onAction="#onSaveTransaction"
-                            GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                    <Button text="Preview Invoice" onAction="#onPreviewInvoice" fx:id="previewInvoiceButton"/>
+            <!-- Separator -->
+            <Separator styleClass="header-separator">
+                <VBox.margin>
+                    <Insets top="15" bottom="15"/>
+                </VBox.margin>
+            </Separator>
 
-                </children>
-            </GridPane>
-        </content>
-    </TitledPane>
-
-    <!-- Transaction Detail Section -->
-    <TitledPane text="Transaction Details" expanded="true">
-        <content>
-            <VBox spacing="10">
-                <TableView fx:id="transactionDetailTable" prefHeight="200" editable="true">
-                    <columns>
-                        <TableColumn fx:id="tdIdColumn" text="ID" prefWidth="50"/>
-                        <TableColumn fx:id="itemIdColumn" text="Item ID" prefWidth="80"/>
-                        <TableColumn fx:id="itemColumn" text="Item" prefWidth="150"/>
-                        <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100"/>
-                        <TableColumn fx:id="sellingPriceColumn" text="Selling Price" prefWidth="100"/>
-                        <TableColumn fx:id="comulativePriceColumn" text="Cumulative Price" prefWidth="120"/>
-                    </columns>
-                </TableView>
-                <HBox spacing="10">
-                    <Button fx:id="addTransactionDetailButton" text="Add Detail" onAction="#addTransactionDetail"/>
-                    <Button fx:id="deleteTransactionDetailButton" text="Delete Detail" onAction="#deleteTransactionDetail"/>
+            <!-- Action Buttons Row -->
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <!-- Navigation Group -->
+                <HBox spacing="8" styleClass="button-group">
+                    <Label text="Navigate:" styleClass="group-label"/>
+                    <Button fx:id="firstTransactionButton" text="⮜ First"
+                            onAction="#onFirstTransaction" styleClass="btn-nav"/>
+                    <Button fx:id="previousTransactionButton" text="◀ Previous"
+                            onAction="#onPreviousTransaction" styleClass="btn-nav"/>
+                    <Button fx:id="nextTransactionButton" text="Next ▶"
+                            onAction="#onNextTransaction" styleClass="btn-nav"/>
+                    <Button fx:id="lastTransactionButton" text="Last ⮞"
+                            onAction="#onLastTransaction" styleClass="btn-nav"/>
                 </HBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Main Actions -->
+                <!-- NEW: New Transaction Button -->
+                <Button fx:id="newTransactionButton" text="📄 New"
+                        onAction="#onNewTransaction" styleClass="btn-new"/>
+
+                <!-- NEW: Print Invoice Button -->
+                <Button fx:id="printInvoiceButton" text="🖨️ Print"
+                        onAction="#onPrintInvoice" styleClass="btn-print"/>
+
+                <Button fx:id="previewInvoiceButton" text="👁 Preview Invoice"
+                        onAction="#onPreviewInvoice" styleClass="btn-secondary"/>
+
+                <Button fx:id="saveTransactionButton" text="💾 Save Transaction"
+                        onAction="#onSaveTransaction" styleClass="btn-primary"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Main Content Area -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="main-scroll">
+            <VBox spacing="20" styleClass="main-content">
+                <padding>
+                    <Insets top="25" right="30" bottom="25" left="30"/>
+                </padding>
+
+                <!-- Transaction Information Card -->
+                <VBox spacing="15" styleClass="info-card">
+                    <Label text="Transaction Information" styleClass="card-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+
+                    <GridPane hgap="25" vgap="18" styleClass="info-grid">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                        </columnConstraints>
+
+                        <!-- Row 1 -->
+                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="Customer *" styleClass="field-label"/>
+                            <ComboBox fx:id="customerComboBox"
+                                      promptText="Search or select customer..."
+                                      editable="true"
+                                      maxWidth="Infinity"
+                                      styleClass="input-field combo-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label text="Sales Representative *" styleClass="field-label"/>
+                            <ComboBox fx:id="employeeComboBox"
+                                      promptText="Select employee..."
+                                      maxWidth="Infinity"
+                                      styleClass="input-field combo-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <Label text="Transaction Type *" styleClass="field-label"/>
+                            <ComboBox fx:id="transactionTypeComboBox"
+                                      maxWidth="Infinity"
+                                      styleClass="input-field combo-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <Label text="Transaction Number" styleClass="field-label"/>
+                            <TextField fx:id="transactionNumberField"
+                                       editable="false"
+                                       promptText="Auto-generated"
+                                       styleClass="input-field readonly-field"/>
+                        </VBox>
+
+                        <!-- Row 2 -->
+                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <Label text="Customer Current Balance" styleClass="field-label"/>
+                            <TextField fx:id="customerBalanceField"
+                                       editable="false"
+                                       promptText="0.00"
+                                       styleClass="input-field readonly-field customer-balance-field">
+                                <font>
+                                    <Font name="System Bold" size="14"/>
+                                </font>
+                            </TextField>
+                        </VBox>
+
+                        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <Label text="Transaction Note" styleClass="field-label"/>
+                            <TextField fx:id="transactionNoteField"
+                                       promptText="Add notes (e.g., withdrawal fees)..."
+                                       styleClass="input-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.columnSpan="2">
+                            <Label text="Total Amount" styleClass="field-label"/>
+                            <TextField fx:id="totalAmountField"
+                                       editable="false"
+                                       promptText="0.00"
+                                       styleClass="total-amount-field">
+                                <font>
+                                    <Font name="System Bold" size="18"/>
+                                </font>
+                            </TextField>
+                        </VBox>
+                    </GridPane>
+                </VBox>
+
+                <!-- Items Section Card -->
+                <VBox spacing="15" styleClass="items-card" VBox.vgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Transaction Items" styleClass="card-title">
+                            <font>
+                                <Font name="System Bold" size="18"/>
+                            </font>
+                        </Label>
+                        <Label text="(Click on table to add items)" styleClass="hint-label"/>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <Button text="🗑 Remove Selected Item"
+                                onAction="#deleteTransactionDetail"
+                                styleClass="btn-remove"/>
+                    </HBox>
+
+                    <TableView fx:id="transactionDetailTable"
+                               editable="true"
+                               VBox.vgrow="ALWAYS"
+                               styleClass="data-table"
+                               minHeight="300">
+                        <columns>
+                            <TableColumn fx:id="tdIdColumn" text="#" prefWidth="50" minWidth="50" maxWidth="50"/>
+                            <TableColumn fx:id="itemIdColumn" text="Item ID" prefWidth="80" minWidth="70"/>
+                            <TableColumn fx:id="itemColumn" text="Item Name" prefWidth="280" minWidth="200"/>
+                            <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="110" minWidth="100"/>
+                            <TableColumn fx:id="sellingPriceColumn" text="Unit Price" prefWidth="130" minWidth="120"/>
+                            <TableColumn fx:id="comulativePriceColumn" text="Line Total" prefWidth="150" minWidth="130"/>
+                        </columns>
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10" styleClass="table-placeholder">
+                                <Label text="📋 No items added yet" styleClass="placeholder-title"/>
+                                <Label text="Click on the table to start adding items" styleClass="placeholder-text"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+                <!-- Payments Section Card -->
+                <VBox spacing="15" styleClass="payments-card">
+                    <Label text="Payment Details" styleClass="card-title">
+                        <font>
+                            <Font name="System Bold" size="18"/>
+                        </font>
+                    </Label>
+
+                    <!-- Payment Input Row -->
+                    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="payment-input-row">
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Amount *" styleClass="field-label-small"/>
+                            <TextField fx:id="pAmountField"
+                                       promptText="Enter amount..."
+                                       prefWidth="150"
+                                       styleClass="input-field payment-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Payment Way *" styleClass="field-label-small"/>
+                            <ComboBox fx:id="pWayComboBox"
+                                      promptText="Select payment way..."
+                                      prefWidth="200"
+                                      maxWidth="Infinity"
+                                      styleClass="input-field combo-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Fee (if applicable)" styleClass="field-label-small"/>
+                            <TextField fx:id="pFeeField"
+                                       editable="false"
+                                       promptText="Auto-calculated"
+                                       prefWidth="120"
+                                       styleClass="input-field readonly-field"/>
+                        </VBox>
+
+                        <VBox spacing="8" alignment="BOTTOM_LEFT">
+                            <Label text=" " styleClass="field-label-small"/>
+                            <HBox spacing="10">
+                                <Button text="➕ Add"
+                                        onAction="#addPayment"
+                                        styleClass="btn-add-payment"/>
+                                <Button text="🗑 Remove"
+                                        onAction="#deletePayment"
+                                        styleClass="btn-remove-payment"/>
+                            </HBox>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Payments Table -->
+                    <TableView fx:id="paymentTable"
+                               styleClass="data-table payments-table"
+                               prefHeight="180"
+                               maxHeight="250">
+                        <columns>
+                            <TableColumn fx:id="pIdColumn" text="#" prefWidth="50" minWidth="50" maxWidth="50"/>
+                            <TableColumn fx:id="pAmountColumn" text="Amount" prefWidth="120" minWidth="100"/>
+                            <TableColumn fx:id="pWayColumn" text="Payment Way" prefWidth="180" minWidth="150"/>
+                            <TableColumn fx:id="pTypeColumn" text="Type" prefWidth="120" minWidth="100"/>
+                            <TableColumn fx:id="pDateColumn" text="Payment Date" prefWidth="180" minWidth="150"/>
+                        </columns>
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10" styleClass="table-placeholder">
+                                <Label text="💳 No payments recorded" styleClass="placeholder-title"/>
+                                <Label text="Add payment details above" styleClass="placeholder-text"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
             </VBox>
-        </content>
-    </TitledPane>
+        </ScrollPane>
+    </center>
 
-
-
-
-    <!-- Payment Section -->
-    <TitledPane text="Payments" expanded="true">
-        <content>
-            <VBox spacing="10">
-                <TableView fx:id="paymentTable" prefHeight="200">
-                    <columns>
-                        <TableColumn fx:id="pIdColumn" text="ID" prefWidth="50"/>
-                        <TableColumn fx:id="pAmountColumn" text="Amount" prefWidth="100"/>
-                        <TableColumn fx:id="pDateColumn" text="Payment Date" prefWidth="150"/>
-                        <TableColumn fx:id="pTypeColumn" text="Payment Type" prefWidth="100"/>
-                        <TableColumn fx:id="pWayColumn" text="Payment Way" prefWidth="100"/>
-                    </columns>
-                </TableView>
-                <HBox spacing="10">
-                    <TextField fx:id="pAmountField" promptText="Amount"/>
-                    <TextField fx:id="pTypeField" promptText="Type"/>
-                    <TextField fx:id="pWayField" promptText="Way"/>
-                    <Button fx:id="addPaymentButton" text="Add Payment" onAction="#addPayment"/>
-                    <Button fx:id="deletePaymentButton" text="Delete Payment" onAction="#deletePayment"/>
-                </HBox>
-            </VBox>
-        </content>
-    </TitledPane>
-
-</VBox>
+</BorderPane>

@@ -16,7 +16,7 @@
       <!-- Sidebar Menu, anchored to the left and resizes vertically with window -->
       <VBox alignment="TOP_CENTER" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #FDFEFE;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="46.0" AnchorPane.bottomAnchor="0.0">
          <children>
-            <Button fx:id="dashboardButton" mnemonicParsing="false" style="-fx-background-color: #F7F9F9;" text="Dashboard" maxWidth="Infinity">
+            <Button fx:id="dashboardButton" mnemonicParsing="false"  style="-fx-background-color: #F7F9F9;" text="Dashboard" maxWidth="Infinity">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

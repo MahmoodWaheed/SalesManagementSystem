@@ -67,4 +67,6 @@ public class PersonService {
     public List<Person> findByType(String type) {
         return personRepository.findByType(type);
     }
+    
+
 }

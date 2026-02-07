@@ -27,6 +27,9 @@ public class Transaction {
     @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
 
+    @Column(name = "withdrawal_fee", precision = 10, scale = 2)
+    private BigDecimal withdrawalFee;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "sales_rep_id", nullable = false)

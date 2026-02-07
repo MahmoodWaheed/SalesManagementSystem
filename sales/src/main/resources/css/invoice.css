@@ -1,59 +1,91 @@
+/* ===== INVOICE PREVIEW STYLES ===== */
+
+/* Header Section */
 .invoice-header {
-    -fx-background-color: white;
-    -fx-padding: 12 18 12 18;
-    -fx-border-color: transparent transparent #ddd transparent;
-    -fx-border-width: 0 0 1 0;
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #f8f9fb);
+    -fx-border-color: #e1e4e8;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 20;
 }
 
 .company-name {
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
 }
 
 .company-address {
-    -fx-font-size: 11px;
-    -fx-text-fill: #444;
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+    -fx-padding: 2 0 0 0;
 }
 
 .invoice-title {
-    -fx-font-size: 18px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
+    -fx-text-fill: #27ae60;
 }
 
 .invoice-meta {
-    -fx-font-size: 12px;
-}
-
-.section-title {
-    -fx-font-weight: bold;
     -fx-font-size: 13px;
-    -fx-text-fill: #333;
+    -fx-text-fill: #5a6c7d;
+    -fx-padding: 2 0 0 0;
 }
 
-.invoice-table .table-header-row {
-    -fx-background-color: #f4f4f4;
-}
-
-.totals-box {
-    -fx-padding: 10;
-    -fx-border-color: #eee;
-    -fx-border-width: 1;
-    -fx-background-color: white;
-}
-
-.grand-total-label {
+/* Section Styling */
+.section-title {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+    -fx-padding: 0 0 8 0;
+}
+
+/* Table Styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #e1e4e8;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #ecf0f1;
+}
+
+.table-view .column-header {
+    -fx-font-weight: 600;
+    -fx-text-fill: #2c3e50;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 5 8 5;
+}
+
+/* Total Section */
+.grand-total-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
 }
 
 .grand-total-value {
-    -fx-font-size: 14px;
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
+    -fx-text-fill: #27ae60;
 }
-.invoice-header { -fx-padding: 12; -fx-border-color: #ddd; -fx-border-width: 0 0 1 0; }
-.company-name { -fx-font-size: 16px; -fx-font-weight: bold; }
-.company-address { -fx-font-size: 11px; -fx-text-fill: #444; }
-.invoice-title { -fx-font-size: 18px; -fx-font-weight: bold; }
-.section-title { -fx-font-weight: bold; -fx-font-size: 13px; }
-.grand-total-label { -fx-font-size: 14px; -fx-font-weight: bold; }
-.grand-total-value { -fx-font-size: 14px; -fx-font-weight: bold; }
+
+/* Buttons */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}

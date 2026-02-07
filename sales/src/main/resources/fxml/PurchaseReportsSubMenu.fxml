@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mahmoud.sales.controller.PurchaseReportsSubMenuController"
+            styleClass="submenu-root"
+            stylesheets="@../css/reportsmenu.css">
+
+    <!-- TOP: Header with back button -->
+    <top>
+        <VBox styleClass="reports-header">
+            <padding>
+                <Insets top="20" right="30" bottom="20" left="30"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Button text="← Back to Reports"
+                        onAction="#onBackToReports"
+                        styleClass="back-button">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <Label text="👥 Purchas Reports" styleClass="reports-title">
+                <font>
+                    <Font name="System Bold" size="26"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="15"/>
+                </VBox.margin>
+            </Label>
+
+            <Label text="Select a Purchas report to view" styleClass="reports-subtitle">
+                <VBox.margin>
+                    <Insets top="8"/>
+                </VBox.margin>
+            </Label>
+
+            <Separator styleClass="header-separator">
+                <VBox.margin>
+                    <Insets top="15" bottom="0"/>
+                </VBox.margin>
+            </Separator>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Available Customer Reports -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="reports-scroll">
+            <VBox spacing="20" styleClass="submenu-content">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30"/>
+                </padding>
+
+                <!-- Purchas Transaction History Report -->
+                <HBox styleClass="report-item"
+                      onMouseClicked="#onPurchasTransactionHistory"
+                      spacing="20" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="📋" styleClass="report-item-icon">
+                        <font>
+                            <Font size="36"/>
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8" HBox.hgrow="ALWAYS">
+                        <Label text="Purchas Transaction History" styleClass="report-item-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+
+                        <Label text="View complete transaction history, payments, and current balance for any Purchas with customizable date ranges"
+                               styleClass="report-item-description"
+                               wrapText="true"/>
+                    </VBox>
+
+                    <Label text="→" styleClass="report-item-arrow">
+                        <font>
+                            <Font size="24"/>
+                        </font>
+                    </Label>
+                </HBox>
+
+                <!-- Purchas Balance Summary (Coming Soon) -->
+                <HBox styleClass="report-item report-item-disabled"
+                      spacing="20" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="💵" styleClass="report-item-icon">
+                        <font>
+                            <Font size="36"/>
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8" HBox.hgrow="ALWAYS">
+                        <Label text="Purchas Balance Summary" styleClass="report-item-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Quick overview of all Purchas balances, sorted by outstanding amounts"
+                               styleClass="report-item-description"
+                               wrapText="true"/>
+                    </VBox>
+
+                    <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                </HBox>
+
+                <!-- Purchas Payment Analysis (Coming Soon) -->
+                <HBox styleClass="report-item report-item-disabled"
+                      spacing="20" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="💳" styleClass="report-item-icon">
+                        <font>
+                            <Font size="36"/>
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8" HBox.hgrow="ALWAYS">
+                        <Label text="Purchas Payment Analysis" styleClass="report-item-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Analyze payment patterns, methods, and trends for better cash flow management"
+                               styleClass="report-item-description"
+                               wrapText="true"/>
+                    </VBox>
+
+                    <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                </HBox>
+
+                <!-- Purchas Aging Report (Coming Soon) -->
+                <HBox styleClass="report-item report-item-disabled"
+                      spacing="20" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="📅" styleClass="report-item-icon">
+                        <font>
+                            <Font size="36"/>
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8" HBox.hgrow="ALWAYS">
+                        <Label text="Purchas Aging Report" styleClass="report-item-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Accounts receivable aging with 30, 60, 90 day buckets for effective collections"
+                               styleClass="report-item-description"
+                               wrapText="true"/>
+                    </VBox>
+
+                    <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                </HBox>
+
+                <!-- Top Purchas Report (Coming Soon) -->
+                <HBox styleClass="report-item report-item-disabled"
+                      spacing="20" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="⭐" styleClass="report-item-icon">
+                        <font>
+                            <Font size="36"/>
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8" HBox.hgrow="ALWAYS">
+                        <Label text="Top Purchas Report" styleClass="report-item-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Identify your best Purchas by transaction volume and revenue contribution"
+                               styleClass="report-item-description"
+                               wrapText="true"/>
+                    </VBox>
+
+                    <Label text="Coming Soon" styleClass="coming-soon-badge"/>
+                </HBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

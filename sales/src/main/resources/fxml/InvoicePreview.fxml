@@ -6,10 +6,14 @@
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.mahmoud.sales.controller.InvoicePreviewController"
-            stylesheets="@../css/invoice.css">
+            stylesheets="@../css/invoice.css"
+            prefHeight="800.0" prefWidth="900.0">
 
     <top>
-        <HBox spacing="10" padding="12" styleClass="invoice-header">
+        <HBox spacing="10" styleClass="invoice-header">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
             <children>
                 <ImageView fx:id="companyLogo" fitHeight="60" fitWidth="60" preserveRatio="true"/>
                 <VBox>
@@ -28,7 +32,11 @@
     </top>
 
     <center>
-        <VBox spacing="12" padding="16">
+        <VBox spacing="12">
+            <padding>
+                <Insets top="16" right="16" bottom="16" left="16"/>
+            </padding>
+
             <GridPane hgap="20" vgap="6">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="50"/>
@@ -39,6 +47,7 @@
                 <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <Label fx:id="lblCustomerName"/>
                     <Label fx:id="lblCustomerLocation"/>
+                    <Label fx:id="lblCustomerOpenBalance"/>
                 </VBox>
 
                 <Label text="مندوب المبيعات:" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="section-title"/>
@@ -48,7 +57,7 @@
                 </VBox>
             </GridPane>
 
-            <TableView fx:id="tblDetails" prefHeight="220">
+            <TableView fx:id="tblDetails" prefHeight="220" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colItem" text="الصنف" prefWidth="220"/>
                     <TableColumn fx:id="colQty" text="الكمية" prefWidth="80"/>
@@ -86,7 +95,10 @@
     </center>
 
     <bottom>
-        <HBox spacing="10" padding="12" alignment="CENTER_RIGHT">
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
             <Button text="طباعة" onAction="#onPrint"/>
             <Button text="إغلاق" onAction="#onClose"/>
         </HBox>
