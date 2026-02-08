@@ -79,7 +79,7 @@
                                textAlignment="CENTER"
                                maxWidth="250"/>
 
-                        <Label text="1 Report" styleClass="report-badge"/>
+                        <Label text="2 Report" styleClass="report-badge"/>
                     </VBox>
                 </VBox>
 

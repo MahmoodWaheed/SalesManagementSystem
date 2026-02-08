@@ -7,9 +7,9 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mahmoud.sales.controller.CustomerReportController"
+            fx:controller="com.mahmoud.sales.controller.CustomerTransactionHistoryReportController"
             styleClass="report-root"
-            stylesheets="@../css/customerreport.css"
+            stylesheets="@../css/CustomerTransactionHistoryReport.css"
             prefHeight="900.0" prefWidth="1400.0">
 
     <!-- TOP: Report Header -->

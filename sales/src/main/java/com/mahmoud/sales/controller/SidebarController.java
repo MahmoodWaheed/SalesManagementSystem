@@ -97,7 +97,7 @@ public class SidebarController {
      */
     @FXML
     public void onReportsButtonClick() {
-        setView("Reports.fxml");  // Load the main Reports menu
+        setView("ReportsMenu.fxml");  // Load the main Reports menu
     }
 
     @FXML

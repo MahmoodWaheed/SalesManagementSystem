@@ -26,7 +26,7 @@ public class PurchaseReportsSubMenuController {
     @FXML
     public void onBackToReports() {
         try {
-            loadView("Reports.fxml");
+            loadView("ReportsMenu.fxml");
         } catch (Exception e) {
             e.printStackTrace();
             showError("Failed to load Reports menu");

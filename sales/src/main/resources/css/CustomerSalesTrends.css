@@ -1,0 +1,368 @@
+/* ═══════════════════════════════════════════════════════════════ */
+/*              CUSTOMER SALES TREND - MODERN DESIGN                */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ===== ROOT ===== */
+.report-root {
+    -fx-background-color: #f0f4f8;
+    -fx-font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.report-header {
+    -fx-background-color: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);
+}
+
+.report-title {
+    -fx-text-fill: #1a202c;
+    -fx-font-weight: bold;
+}
+
+.report-subtitle {
+    -fx-text-fill: #718096;
+    -fx-font-size: 14px;
+}
+
+.header-separator {
+    -fx-background-color: linear-gradient(to right, transparent, #cbd5e0, transparent);
+    -fx-padding: 1 0 1 0;
+}
+
+/* ===== BUTTONS ===== */
+.back-button {
+    -fx-background-color: linear-gradient(to bottom, #edf2f7 0%, #e2e8f0 100%);
+    -fx-text-fill: #4a5568;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.back-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #e2e8f0 0%, #cbd5e0 100%);
+}
+
+.export-button {
+    -fx-background-color: linear-gradient(to bottom, #48bb78 0%, #38a169 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 8, 0, 0, 2);
+}
+
+.export-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #38a169 0%, #2f855a 100%);
+}
+
+.print-button {
+    -fx-background-color: linear-gradient(to bottom, #9f7aea 0%, #805ad5 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(159, 122, 234, 0.3), 8, 0, 0, 2);
+}
+
+.print-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #805ad5 0%, #6b46c1 100%);
+}
+
+.generate-button {
+    -fx-background-color: linear-gradient(to bottom, #4299e1 0%, #3182ce 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-padding: 12 28 12 28;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(66, 153, 225, 0.4), 10, 0, 0, 3);
+}
+
+.generate-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #3182ce 0%, #2c5282 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.reset-button {
+    -fx-background-color: linear-gradient(to bottom, #a0aec0 0%, #718096 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-padding: 12 28 12 28;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.reset-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #718096 0%, #4a5568 100%);
+}
+
+/* ===== FILTERS ===== */
+.filters-grid {
+    -fx-background-color: transparent;
+}
+
+.filter-label {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.filter-combo,
+.filter-date {
+    -fx-font-size: 14px;
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 8;
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+}
+
+.filter-combo:focused,
+.filter-combo:showing,
+.filter-date:focused {
+    -fx-background-color: #ebf8ff;
+    -fx-border-color: #4299e1;
+    -fx-effect: dropshadow(gaussian, rgba(66, 153, 225, 0.3), 12, 0, 0, 0);
+}
+
+/* ===== SCROLL PANE ===== */
+.content-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.content-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.content-area {
+    -fx-background-color: transparent;
+}
+
+/* ===== SUMMARY CARDS ===== */
+.summary-cards {
+    -fx-background-color: transparent;
+}
+
+.summary-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20 25 20 25;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);
+}
+
+.total-sales-card {
+    -fx-border-color: #48bb78;
+}
+
+.transaction-count-card {
+    -fx-border-color: #4299e1;
+}
+
+.avg-sale-card {
+    -fx-border-color: #ed8936;
+}
+
+.growth-card {
+    -fx-border-color: #9f7aea;
+}
+
+.card-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.card-value {
+    -fx-text-fill: #2d3748;
+    -fx-font-weight: bold;
+}
+
+.card-change {
+    -fx-font-size: 12px;
+    -fx-text-fill: #718096;
+}
+
+.card-change.positive {
+    -fx-text-fill: #48bb78;
+}
+
+.card-change.negative {
+    -fx-text-fill: #f56565;
+}
+
+/* ===== CHART CARD ===== */
+.chart-card,
+.table-card,
+.customers-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 25;
+    -fx-background-radius: 12;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 2);
+}
+
+.section-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-weight: bold;
+}
+
+.period-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+.info-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+}
+
+/* ===== CHART STYLING ===== */
+.chart-container {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 8;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 15;
+}
+
+.chart {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+.chart-legend {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+
+.axis-label {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 12px;
+}
+
+.chart-series-line {
+    -fx-stroke-width: 3px;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #4299e1; }
+.default-color1.chart-series-line { -fx-stroke: #48bb78; }
+.default-color2.chart-series-line { -fx-stroke: #ed8936; }
+
+.default-color0.chart-line-symbol { -fx-background-color: #4299e1, white; }
+.default-color1.chart-line-symbol { -fx-background-color: #48bb78, white; }
+.default-color2.chart-line-symbol { -fx-background-color: #ed8936, white; }
+
+/* ===== TABLE STYLING ===== */
+.data-table {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #f7fafc 0%, #edf2f7 100%);
+    -fx-border-color: #cbd5e0;
+    -fx-border-width: 0 0 2 0;
+}
+
+.data-table .column-header {
+    -fx-font-size: 13px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #2d3748;
+    -fx-padding: 12 8 12 8;
+}
+
+.data-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #f0f4f8 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.data-table .table-row-cell:odd {
+    -fx-background-color: #fafafa;
+}
+
+.data-table .table-row-cell:selected {
+    -fx-background-color: #ebf8ff;
+    -fx-text-fill: #2c5282;
+    -fx-border-color: #4299e1;
+    -fx-border-width: 0 0 2 0;
+}
+
+.data-table .table-row-cell:hover {
+    -fx-background-color: #f0f9ff;
+}
+
+.data-table .table-cell {
+    -fx-padding: 10 8 10 8;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2d3748;
+}
+
+.data-table .table-cell:selected {
+    -fx-text-fill: #1a365d;
+}
+
+/* ===== TABLE PLACEHOLDER ===== */
+.table-placeholder {
+    -fx-padding: 40;
+}
+
+.placeholder-title {
+    -fx-text-fill: #4a5568;
+    -fx-font-weight: 600;
+}
+
+.placeholder-text {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 13px;
+}
+
+/* ===== SCROLLBAR ===== */
+.data-table .scroll-bar:vertical,
+.data-table .scroll-bar:horizontal {
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 8;
+}
+
+.data-table .scroll-bar .thumb {
+    -fx-background-color: #cbd5e0;
+    -fx-background-radius: 8;
+}
+
+.data-table .scroll-bar .thumb:hover {
+    -fx-background-color: #a0aec0;
+}
+
+/* ===== ANIMATIONS ===== */
+.generate-button,
+.reset-button,
+.export-button,
+.print-button,
+.back-button {
+    -fx-transition: all 0.2s ease;
+}

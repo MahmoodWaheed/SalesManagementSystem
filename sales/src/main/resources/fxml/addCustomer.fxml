@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.HBox?>
 <VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mahmoud.sales.controller.AddCustomerController" spacing="10">
     <children>
-        <Label text="Add New Supplier" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <Label text="Add New Customer" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-        <!-- Form for adding supplier -->
+        <!-- Form for adding Customer -->
         <GridPane hgap="10" vgap="10">
             <children>
-                <!-- Supplier Name -->
-                <Label text="Supplier Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="nameField" promptText="Enter supplier name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <!-- Customer Name -->
+                <Label text="Customer Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nameField" promptText="Enter Customer name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <!-- Supplier Location -->
+                <!-- Customer Location -->
                 <Label text="Location:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <TextField fx:id="locationField" promptText="Enter location" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                <!-- Supplier Balance -->
+                <!-- Customer Balance -->
                 <Label text="Open Balance:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
                 <TextField fx:id="balanceField" promptText="Enter balance" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
             </children>
@@ -31,7 +31,7 @@
 
         <!-- Save and Cancel buttons -->
         <HBox spacing="10">
-            <Button text="Save" onAction="#handleSaveSupplier"/>
+            <Button text="Save" onAction="#handleSaveCustomer"/>
             <Button text="Cancel" onAction="#handleCancel"/>
         </HBox>
     </children>

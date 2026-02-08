@@ -6,7 +6,6 @@ import com.mahmoud.sales.entity.Transaction;
 import com.mahmoud.sales.service.CustomerReportService;
 import com.mahmoud.sales.service.PersonService;
 import com.mahmoud.sales.util.SpringFXMLLoader;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,10 +24,9 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Controller
-public class CustomerReportController {
+public class CustomerTransactionHistoryReportController {
 
     @Autowired
     private CustomerReportService reportService;

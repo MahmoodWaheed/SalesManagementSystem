@@ -210,6 +210,34 @@
                       onMouseClicked="#onCustomerSalesTrends"
                       spacing="20" alignment="CENTER_LEFT">
                     <!-- ... report details ... -->
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="⭐" styleClass="report-item-icon">
+                        <font>
+                            <Font size="36"/>
+                        </font>
+                    </Label>
+
+                    <VBox spacing="8" HBox.hgrow="ALWAYS">
+                        <Label text="Customer Sales Trends " styleClass="report-item-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+
+                        <Label text="Identify your best customers by transaction volume and revenue contribution"
+                               styleClass="report-item-description"
+                               wrapText="true"/>
+                    </VBox>
+                    <Label text="→" styleClass="report-item-arrow">
+                        <font>
+                            <Font size="24"/>
+                        </font>
+                    </Label>
+
+
                 </HBox>
 
 

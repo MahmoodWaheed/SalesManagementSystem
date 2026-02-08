@@ -32,7 +32,7 @@ public class AddCustomerController implements PersonHandler {
     }
 
     @FXML
-    public void handleSaveSupplier() {
+    public void handleSaveCustomer() {
         // Get values from input fields
         String name = nameField.getText();
         String location = locationField.getText();
@@ -52,15 +52,15 @@ public class AddCustomerController implements PersonHandler {
             return;
         }
 
-        // Create new Person (Supplier)
-        Person supplier = new Person();
-        supplier.setName(name);
-        supplier.setLocation(location);
-        supplier.setOpenBalance(balance);
-        supplier.setType("Customer");  // Set type to Customer
+        // Create new Person (Customer)
+        Person Customer = new Person();
+        Customer.setName(name);
+        Customer.setLocation(location);
+        Customer.setOpenBalance(balance);
+        Customer.setType("Customer");  // Set type to Customer
 
-        // Save the supplier
-        personService.savePerson(supplier);
+        // Save the Customer
+        personService.savePerson(Customer);
 
         // Close the popup window
         closeWindow();

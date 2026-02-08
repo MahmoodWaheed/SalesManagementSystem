@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.BarChart?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mahmoud.sales.controller.CustomerSalesTrendsController"
+            styleClass="report-root"
+            stylesheets="@../css/CustomerSalesTrends.css"
+            prefHeight="900.0" prefWidth="1400.0">
+
+    <!-- TOP: Header with Back Button and Title -->
+    <top>
+        <VBox styleClass="report-header">
+            <padding>
+                <Insets top="20" right="30" bottom="20" left="30"/>
+            </padding>
+
+            <!-- Back Button Row -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Button text="← Back to Customer Reports"
+                        onAction="#onBackToCustomerReports"
+                        styleClass="back-button">
+                    <font>
+                        <Font size="13"/>
+                    </font>
+                </Button>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <!-- Report Title -->
+            <Label text="📈 Customer Sales Trend Analysis" styleClass="report-title">
+                <font>
+                    <Font name="System Bold" size="26"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="15"/>
+                </VBox.margin>
+            </Label>
+
+            <Label text="Analyze sales patterns and trends for individual customers" styleClass="report-subtitle">
+                <VBox.margin>
+                    <Insets top="8"/>
+                </VBox.margin>
+            </Label>
+
+            <Separator styleClass="header-separator">
+                <VBox.margin>
+                    <Insets top="15" bottom="0"/>
+                </VBox.margin>
+            </Separator>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="report-scroll">
+            <VBox spacing="25" styleClass="report-content">
+                <padding>
+                    <Insets top="25" right="30" bottom="25" left="30"/>
+                </padding>
+
+                <!-- Filter Section -->
+                <VBox spacing="15" styleClass="filter-card">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="📊 Report Filters" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+
+                    <GridPane hgap="20" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                        </columnConstraints>
+
+                        <!-- Customer Selection -->
+                        <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="Customer *" styleClass="filter-label"/>
+                            <ComboBox fx:id="customerComboBox"
+                                      promptText="Select customer..."
+                                      maxWidth="Infinity"
+                                      styleClass="filter-combo"/>
+                        </VBox>
+
+                        <!-- Date From -->
+                        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label text="Date From" styleClass="filter-label"/>
+                            <DatePicker fx:id="dateFromPicker"
+                                        promptText="Start date"
+                                        maxWidth="Infinity"
+                                        styleClass="filter-date"/>
+                        </VBox>
+
+                        <!-- Date To -->
+                        <VBox spacing="8" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <Label text="Date To" styleClass="filter-label"/>
+                            <DatePicker fx:id="dateToPicker"
+                                        promptText="End date"
+                                        maxWidth="Infinity"
+                                        styleClass="filter-date"/>
+                        </VBox>
+
+                        <!-- Period Type -->
+                        <VBox spacing="8" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <Label text="Group By" styleClass="filter-label"/>
+                            <ComboBox fx:id="periodComboBox"
+                                      maxWidth="Infinity"
+                                      styleClass="filter-combo"/>
+                        </VBox>
+                    </GridPane>
+
+                    <!-- Action Buttons -->
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <VBox.margin>
+                            <Insets top="10"/>
+                        </VBox.margin>
+
+                        <Button text="🔍 Generate Report"
+                                onAction="#onGenerateReport"
+                                styleClass="btn-generate"/>
+
+<!--                        <Button text="📊 Export to Excel"-->
+<!--                                onAction="#onExportExcel"-->
+<!--                                styleClass="btn-export"/>-->
+
+                        <Button text="🖨️ Print"
+                                onAction="#onPrintReport"
+                                styleClass="btn-print-small"/>
+
+<!--                        <Button text="🔄 Reset"-->
+<!--                                onAction="#onReset"-->
+<!--                                styleClass="btn-reset"/>-->
+                    </HBox>
+                </VBox>
+
+                <!-- Summary Cards -->
+                <GridPane hgap="20" vgap="20" styleClass="summary-grid">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                    </columnConstraints>
+
+                    <!-- Total Sales Card -->
+                    <VBox spacing="10" styleClass="stat-card total-sales-card"
+                          GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <Label text="💰" styleClass="stat-icon">
+                            <font><Font size="32"/></font>
+                        </Label>
+                        <Label text="Total Sales" styleClass="stat-label"/>
+                        <Label fx:id="totalSalesLabel" text="0.00 EGP" styleClass="stat-value">
+                            <font><Font name="System Bold" size="22"/></font>
+                        </Label>
+                    </VBox>
+
+                    <!-- Transaction Count Card -->
+                    <VBox spacing="10" styleClass="stat-card transaction-card"
+                          GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <Label text="📋" styleClass="stat-icon">
+                            <font><Font size="32"/></font>
+                        </Label>
+                        <Label text="Transactions" styleClass="stat-label"/>
+                        <Label fx:id="transactionCountLabel" text="0" styleClass="stat-value">
+                            <font><Font name="System Bold" size="22"/></font>
+                        </Label>
+                    </VBox>
+
+                    <!-- Average Transaction Card -->
+                    <VBox spacing="10" styleClass="stat-card average-card"
+                          GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <Label text="📊" styleClass="stat-icon">
+                            <font><Font size="32"/></font>
+                        </Label>
+                        <Label text="Avg Transaction" styleClass="stat-label"/>
+                        <Label fx:id="avgTransactionLabel" text="0.00 EGP" styleClass="stat-value">
+                            <font><Font name="System Bold" size="22"/></font>
+                        </Label>
+                    </VBox>
+
+                    <!-- Growth Trend Card -->
+                    <VBox spacing="10" styleClass="stat-card growth-card"
+                          GridPane.columnIndex="3" GridPane.rowIndex="0">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        <Label text="📈" styleClass="stat-icon">
+                            <font><Font size="32"/></font>
+                        </Label>
+                        <Label text="Growth Trend" styleClass="stat-label"/>
+                        <Label fx:id="growthTrendLabel" text="+0%" styleClass="stat-value">
+                            <font><Font name="System Bold" size="22"/></font>
+                        </Label>
+                    </VBox>
+                </GridPane>
+
+                <!-- Sales Trend Chart -->
+                <VBox spacing="15" styleClass="chart-card">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="📈 Sales Over Time" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+
+                    <LineChart fx:id="salesTrendChart"
+                               styleClass="trend-chart"
+                               legendVisible="true"
+                               animated="true"
+                               prefHeight="350">
+                        <xAxis>
+                            <CategoryAxis label="Period" fx:id="chartXAxis"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Sales Amount (EGP)" fx:id="chartYAxis"/>
+                        </yAxis>
+                    </LineChart>
+                </VBox>
+
+                <!-- Monthly Breakdown Chart -->
+                <VBox spacing="15" styleClass="chart-card">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="📊 Monthly Sales Breakdown" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+
+                    <BarChart fx:id="monthlyBarChart"
+                              styleClass="bar-chart"
+                              legendVisible="false"
+                              animated="true"
+                              prefHeight="300">
+                        <xAxis>
+                            <CategoryAxis label="Month" fx:id="barChartXAxis"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Amount (EGP)" fx:id="barChartYAxis"/>
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <!-- Detailed Transactions Table -->
+                <VBox spacing="15" styleClass="table-card">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="📋 Transaction Details" styleClass="section-title">
+                            <font>
+                                <Font name="System Bold" size="16"/>
+                            </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="tableCountLabel" text="0 transactions" styleClass="table-count"/>
+                    </HBox>
+
+                    <TableView fx:id="transactionsTable"
+                               styleClass="data-table"
+                               prefHeight="300">
+                        <columns>
+                            <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
+                            <TableColumn fx:id="colInvoiceNo" text="Invoice #" prefWidth="100"/>
+                            <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colAmount" text="Amount" prefWidth="130"/>
+                            <TableColumn fx:id="colPayment" text="Payments" prefWidth="130"/>
+                            <TableColumn fx:id="colBalance" text="Balance" prefWidth="130"/>
+                            <TableColumn fx:id="colNote" text="Note" prefWidth="200"/>
+                        </columns>
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10" styleClass="table-placeholder">
+                                <Label text="📊 No Data Available" styleClass="placeholder-title"/>
+                                <Label text="Select a customer and generate the report to view transactions"
+                                       styleClass="placeholder-text"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+                <!-- Best Performing Periods -->
+                <VBox spacing="15" styleClass="info-card">
+                    <padding>
+                        <Insets top="20" right="25" bottom="20" left="25"/>
+                    </padding>
+
+                    <Label text="⭐ Top Performing Periods" styleClass="section-title">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+
+                    <TableView fx:id="topPeriodsTable"
+                               styleClass="data-table"
+                               prefHeight="200">
+                        <columns>
+                            <TableColumn fx:id="colPeriod" text="Period" prefWidth="200"/>
+                            <TableColumn fx:id="colPeriodSales" text="Total Sales" prefWidth="150"/>
+                            <TableColumn fx:id="colPeriodCount" text="Transactions" prefWidth="120"/>
+                            <TableColumn fx:id="colPeriodAvg" text="Average" prefWidth="150"/>
+                        </columns>
+                        <placeholder>
+                            <VBox alignment="CENTER" spacing="10" styleClass="table-placeholder">
+                                <Label text="No data to display" styleClass="placeholder-text"/>
+                            </VBox>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

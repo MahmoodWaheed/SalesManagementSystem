@@ -28,7 +28,7 @@ public class CustomerReportsSubMenuController {
     @FXML
     public void onBackToReports() {
         try {
-            loadView("Reports.fxml");
+            loadView("ReportsMenu.fxml");
         } catch (Exception e) {
             e.printStackTrace();
             showError("Failed to load Reports menu");
@@ -41,10 +41,19 @@ public class CustomerReportsSubMenuController {
     @FXML
     public void onCustomerTransactionHistory(MouseEvent event) {
         try {
-            loadView("CustomerReport.fxml");
+            loadView("CustomerTransactionHistoryReport.fxml");
         } catch (Exception e) {
             e.printStackTrace();
             showError("Failed to load Customer Transaction History report");
+        }
+    }
+
+    @FXML
+    public void onCustomerSalesTrends(MouseEvent event) {
+        try {
+            loadView("CustomerSalesTrends.fxml");
+        } catch (Exception e) {
+            showError("Failed to load report");
         }
     }
 
@@ -68,14 +77,7 @@ public class CustomerReportsSubMenuController {
         }
     }
 
-    @FXML
-    public void onCustomerSalesTrends(MouseEvent event) {
-        try {
-            loadView("CustomerSalesTrends.fxml");
-        } catch (Exception e) {
-            showError("Failed to load report");
-        }
-    }
+
 
     /**
      * Show error alert
