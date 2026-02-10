@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PurchasetransactionRepository extends JpaRepository<Purchasetransaction, Integer> {
     // Additional query methods can be defined here, e.g., find by person or date range
+
 }

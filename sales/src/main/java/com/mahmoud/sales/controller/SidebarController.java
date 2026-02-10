@@ -112,7 +112,7 @@ public class SidebarController {
 
     @FXML
     public void onPurchaseButtonClick() {
-        setView("Purchase.fxml");
+        setView("Purchaseform.fxml");
     }
 
     @FXML

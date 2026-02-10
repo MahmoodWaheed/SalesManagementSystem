@@ -7,10 +7,7 @@ import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,7 +77,12 @@ public class ItemController {
         item.setName(name);
         item.setItemBalance(balance);
         item.setSellingPrice(sellingPrice);
-
+        try {
+            itemService.saveItem(item);
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Failed to add this item : " + e.getMessage());
+        }
         itemService.saveItem(item);
         loadItems(); // Reload the table
     }
@@ -92,5 +94,16 @@ public class ItemController {
             itemService.deleteItem(selectedItem.getId());
             loadItems(); // Reload the table
         }
+    }
+
+    /**
+     * Show error alert
+     */
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

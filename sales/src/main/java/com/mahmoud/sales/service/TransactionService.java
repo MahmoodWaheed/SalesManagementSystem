@@ -95,16 +95,6 @@ public class TransactionService {
             }
             paymentRepository.save(p);
         }
-
-//        // 4. compute totals again (optional)
-//        BigDecimal computedTotal = details.stream()
-//                .filter(this::isDetailValid)
-//                .map(d -> d.getComulativePrice() != null ? d.getComulativePrice() : BigDecimal.ZERO)
-//                .reduce(BigDecimal.ZERO, BigDecimal::add);
-//
-//        savedTx.setTotalAmount(computedTotal);
-//        return transactionRepository.save(savedTx);
-        // 4. Validate and recalculate total (preserving withdrawal fee)
         BigDecimal itemsTotal = details.stream()
                 .filter(this::isDetailValid)
                 .map(d -> d.getComulativePrice() != null ? d.getComulativePrice() : BigDecimal.ZERO)

@@ -101,7 +101,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="purchaseButton" mnemonicParsing="false" style="-fx-background-color: #F7F9F9;" text="Purchase" maxWidth="Infinity">
+            <Button fx:id="purchaseButton" mnemonicParsing="false" onAction="#onPurchaseButtonClick" style="-fx-background-color: #F7F9F9;" text="Purchase" maxWidth="Infinity">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

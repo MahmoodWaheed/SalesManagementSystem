@@ -28,6 +28,12 @@ public class PurchasedetailId implements java.io.Serializable {
                 Objects.equals(this.id, entity.id);
     }
 
+    public PurchasedetailId () {}
+    public PurchasedetailId(Integer id, Integer purchasetransactionId) {
+        this.id = id;
+        this.purchasetransactionId = purchasetransactionId;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(purchasetransactionId, id);

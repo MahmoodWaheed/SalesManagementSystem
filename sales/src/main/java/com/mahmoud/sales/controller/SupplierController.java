@@ -1,3 +1,4 @@
+
 package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Person;
@@ -83,10 +84,6 @@ public class SupplierController {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         balanceColumn.setCellValueFactory(new PropertyValueFactory<>("openBalance"));
-//        transactionAmountColumn.setCellValueFactory(new PropertyValueFactory<>("transactionAmount"));
-//        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<>("paymentAmount"));
-//        remainingBalanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
-
         // Add a column for phones
         phonesColumn.setCellValueFactory(cellData -> {
             Person person = cellData.getValue();
@@ -275,19 +272,6 @@ public class SupplierController {
         ObservableList<Person> supplierData = FXCollections.observableArrayList(suppliers);
         personTable.setItems(supplierData);
 
-//        // Display the phone numbers in the table by fetching them using the phoneService
-//        System.out.println("Loading phone numbers for suppliers"); // Debugging
-//        phonesColumn.setCellValueFactory(cellData -> {
-//            Person person = cellData.getValue();
-//            System.out.println("Person: " + person.getName()); // Debugging
-//            List<Phone> phones = phoneService.findPhonesByPersonId(person.getId());
-//            System.out.println("Phones: " + phones.size()); // Debugging
-//            phones.forEach(phone -> System.out.println("Phone: " + phone.getPhoneNumber())); // Debugging
-//            String phoneNumbers = phones.stream()
-//                    .map(Phone::getPhoneNumber)
-//                    .collect(Collectors.joining(", "));
-//            return new javafx.beans.property.SimpleStringProperty(phoneNumbers);
-//        });
     }
 }
 

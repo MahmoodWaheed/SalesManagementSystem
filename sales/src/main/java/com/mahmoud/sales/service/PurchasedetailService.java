@@ -5,6 +5,7 @@ import com.mahmoud.sales.entity.PurchasedetailId;
 import com.mahmoud.sales.repository.PurchasedetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,18 @@ public class PurchasedetailService {
 
     @Autowired
     private PurchasedetailRepository purchasedetailRepository;
+
+    @Autowired
+    private PurchasedetailRepository repository;
+
+    /**
+     * Return next detail id (integer) for given purchase transaction id.
+     */
+    @Transactional(readOnly = true)
+    public Integer nextDetailIdForPurchase(Integer purchaseTransactionId) {
+        Integer maxId = repository.findMaxIdByPurchaseTransactionId(purchaseTransactionId);
+        return (maxId == null) ? 1 : maxId + 1;
+    }
 
     public List<Purchasedetail> findAllPurchasedetails() {
         return purchasedetailRepository.findAll();
@@ -29,5 +42,12 @@ public class PurchasedetailService {
 
     public void deletePurchasedetail(PurchasedetailId id) {
         purchasedetailRepository.deleteById(id);
+    }
+
+    /**
+     * Find purchase details by purchase transaction ID
+     */
+    public List<Purchasedetail> findPurchaseDetailsByPurchaseTransactionId(Integer purchaseTransactionId) {
+        return purchasedetailRepository.findByPurchaseTransaction_Id(purchaseTransactionId);
     }
 }

@@ -31,6 +31,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+// ADD at top
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableColumn;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
@@ -1100,17 +1107,6 @@ public class SalesFormController {
             tx.setWithdrawalFee(totalFees);  // ✅ NEW: Store fee separately
             tx.setTotalAmount(grandTotal);   // ✅ Store grand total
 
-//            // Calculate amounts
-//            BigDecimal itemsTotal = detailsToSave.stream()
-//                    .map(d -> d.getComulativePrice() != null ? d.getComulativePrice() : BigDecimal.ZERO)
-//                    .reduce(BigDecimal.ZERO, BigDecimal::add);
-//
-//            BigDecimal totalFees = calculateTotalWithdrawalFees();
-//            BigDecimal grandTotal = itemsTotal.add(totalFees);
-//
-//            // CRITICAL: Store withdrawal fee separately
-//            tx.setWithdrawalFee(totalFees);
-//            tx.setTotalAmount(grandTotal);
 
             // Save transaction with details and payments
             Transaction saved = transactionService.saveTransactionWithDetailsAndPayments(
@@ -1254,59 +1250,6 @@ public class SalesFormController {
         }
     }
 
-//    private void loadTransaction(Integer transactionId) {
-//        try {
-//            // Load transaction data through InvoiceService (handles lazy loading)
-//            InvoiceService.InvoiceData data =
-//                    SpringFXMLLoader.loadController(InvoiceService.class).prepareInvoice(transactionId);
-//
-//            currentTransaction = data.getTransaction();
-//
-//            // Populate form fields
-//            customerComboBox.setValue(data.getTransaction().getPerson());
-//            employeeComboBox.setValue(data.getTransaction().getSalesRep());
-//            transactionTypeComboBox.setValue(data.getTransaction().getTransactionType());
-//            totalAmountField.setText(data.getTransaction().getTotalAmount().toPlainString());
-//
-//            // Set note if exists
-//            if (data.getTransaction().getNote() != null) {
-//                transactionNoteField.setText(data.getTransaction().getNote());
-//            } else {
-//                transactionNoteField.clear();
-//            }
-//
-//            // CRITICAL: Restore withdrawal fees from database
-//            paymentFeesMap.clear();
-//            totalWithdrawalFees = data.getTransaction().getWithdrawalFee() != null ?
-//                    data.getTransaction().getWithdrawalFee() : BigDecimal.ZERO;
-//
-//            // Load transaction details
-//            transactiondetailList.clear();
-//            transactiondetailList.addAll(data.getDetails());
-//            addBlankDetailRow();
-//
-//            // Load payments
-//            paymentList.clear();
-//            paymentList.addAll(data.getPayments());
-//
-//            // Restore fee associations with payments
-//            restorePaymentFeeAssociations();
-//
-//            // Update invoice label
-//            updateCurrentInvoiceLabel();
-//
-//            // Update customer balance
-//            updateCustomerBalance();
-//
-//            // Refresh tables
-//            transactionDetailTable.refresh();
-//            paymentTable.refresh();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            showAlert("Error loading transaction: " + e.getMessage());
-//        }
-//    }
 private void loadTransaction(Integer transactionId) {
 
     try {
@@ -1499,7 +1442,6 @@ private void loadTransaction(Integer transactionId) {
         // we just ensure the total includes the fees
         // The totalWithdrawalFees variable now contains the total fees
     }
-
     private void showAlert(String msg) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("Sales");
