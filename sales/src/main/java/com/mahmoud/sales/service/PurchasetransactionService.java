@@ -4,9 +4,9 @@ import com.mahmoud.sales.entity.*;
 import com.mahmoud.sales.repository.PaymentRepository;
 import com.mahmoud.sales.repository.PurchasedetailRepository;
 import com.mahmoud.sales.repository.PurchasetransactionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,7 +25,7 @@ public class PurchasetransactionService {
     private PaymentRepository paymentRepository;
 
     @Autowired
-    private PurchasedetailService purchasedetailService; // for helper like nextDetailIdForPurchase
+    private PurchasedetailService purchasedetailService;
 
     public List<Purchasetransaction> findAllPurchasetransactions() {
         return purchasetransactionRepository.findAll();
@@ -45,7 +45,7 @@ public class PurchasetransactionService {
 
     /**
      * Save purchase transaction with details and payments in a single transaction
-     * FIXED: Properly handle composite primary key sequencing
+     * FIXED: Using EXACT SAME logic as TransactionService (sales) - NO FLUSH!
      */
     @Transactional
     public Purchasetransaction savePurchaseWithDetailsAndPayments(Purchasetransaction purchasetransaction,
@@ -56,8 +56,6 @@ public class PurchasetransactionService {
         Integer purchaseId = saved.getId();
 
         // 2. Persist details with proper sequential IDs
-        // CRITICAL FIX: Query the database to get the next available ID for this purchase
-        // This handles both new purchases (starts at 1) and updates (continues from max ID)
         for (Purchasedetail detail : details) {
             if (!isDetailValid(detail)) continue; // skip empty rows
 
@@ -65,9 +63,7 @@ public class PurchasetransactionService {
             Integer nextDetailId = purchasedetailService.nextDetailIdForPurchase(purchaseId);
 
             // Create composite ID
-            PurchasedetailId detailId = new PurchasedetailId();
-            detailId.setId(nextDetailId);
-            detailId.setPurchasetransactionId(purchaseId);
+            PurchasedetailId detailId = new PurchasedetailId(nextDetailId, purchaseId);
 
             detail.setId(detailId);
             detail.setPurchaseTransaction(saved);

@@ -5,7 +5,6 @@ import com.mahmoud.sales.entity.PurchasedetailId;
 import com.mahmoud.sales.repository.PurchasedetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +20,9 @@ public class PurchasedetailService {
 
     /**
      * Return next detail id (integer) for given purchase transaction id.
+     * CRITICAL: No @Transactional annotation here!
+     * This method must run in the SAME transaction as the caller to see uncommitted data.
      */
-    @Transactional(readOnly = true)
     public Integer nextDetailIdForPurchase(Integer purchaseTransactionId) {
         Integer maxId = repository.findMaxIdByPurchaseTransactionId(purchaseTransactionId);
         return (maxId == null) ? 1 : maxId + 1;
