@@ -1,19 +1,3 @@
-//package com.mahmoud.sales.repository;
-//
-//import com.mahmoud.sales.entity.Employee;
-//import com.mahmoud.sales.entity.Person;
-//import com.mahmoud.sales.entity.Phone;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//import java.util.List;
-//
-//@Repository
-//public interface PhoneRepository extends JpaRepository<Phone, Integer> {
-//    // Additional query methods to fetch phones based on employee or person (if needed)
-//    List<Phone> findByEmployee(Employee employee);
-//    List<Phone> findByPerson(Person person);
-//}
 package com.mahmoud.sales.repository;
 
 import com.mahmoud.sales.entity.Employee;
@@ -26,13 +10,14 @@ import java.util.List;
 
 @Repository
 public interface PhoneRepository extends JpaRepository<Phone, Integer> {
-    // Additional query methods to fetch phones based on employee or person (if needed)
+
     List<Phone> findByEmployee(Employee employee);
+
     List<Phone> findByPerson(Person person);
 
-    // Performance-optimized lookups (avoid loading Person entity first)
+    // Fast lookups without fetching Person entity first
     List<Phone> findByPersonId(Integer personId);
 
-    // Batch load phones for a set of persons (used by paging UI)
+    // Batch loading for a page
     List<Phone> findByPersonIdIn(List<Integer> personIds);
 }

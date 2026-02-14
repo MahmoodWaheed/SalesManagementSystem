@@ -34,6 +34,18 @@ public class Item {
     @Column(name = "purchasing_price", precision = 10, scale = 2)
     private BigDecimal purchasingPrice;
 
+    /**
+     * ✅ Soft delete flag
+     * Active items only should appear in UI.
+     */
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = true;
+    @PrePersist
+    public void prePersist() {
+        if (isActive == null) isActive = true;
+    }
+
+
     @OneToMany(mappedBy = "item")
     private Set<Purchasedetail> purchasedetails = new LinkedHashSet<>();
 

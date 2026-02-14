@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
@@ -13,106 +12,78 @@
 
     <BorderPane styleClass="screen">
 
-        <!-- Header -->
         <top>
-            <VBox spacing="10" styleClass="header" BorderPane.alignment="CENTER">
+            <VBox spacing="10" styleClass="header">
                 <HBox alignment="CENTER_LEFT" spacing="12">
-                    <Text text="Customers" styleClass="title" />
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button fx:id="addButton" text="+ Add Customer" onAction="#handleAddPersonPopup" styleClass="btn btn-primary" />
+                    <Text text="Customers" styleClass="title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="addButton" text="+ Add Customer" onAction="#handleAddPersonPopup" styleClass="btn btn-primary"/>
                 </HBox>
 
                 <HBox spacing="10" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField" promptText="Search by name or location..." HBox.hgrow="ALWAYS" />
-                    <Button fx:id="clearSearchButton" text="Clear" onAction="#handleClearSearch" styleClass="btn" />
-                    <Button fx:id="refreshButton" text="Refresh" onAction="#handleRefresh" styleClass="btn" />
+                    <TextField fx:id="searchField" promptText="Search by name or location..." HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="clearSearchButton" text="Clear" onAction="#handleClearSearch" styleClass="btn"/>
+                    <Button fx:id="refreshButton" text="Refresh" onAction="#handleRefresh" styleClass="btn"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Sort:" styleClass="muted"/>
+                    <ComboBox fx:id="sortCombo" prefWidth="220"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="Page size:" styleClass="muted"/>
+                    <ComboBox fx:id="pageSizeCombo" prefWidth="110"/>
                 </HBox>
             </VBox>
         </top>
 
-        <!-- Table -->
         <center>
-            <VBox styleClass="content" spacing="10" BorderPane.alignment="CENTER">
+            <VBox styleClass="content" spacing="10">
                 <TableView fx:id="personTable" VBox.vgrow="ALWAYS" styleClass="data-table">
                     <columns>
-                        <TableColumn fx:id="idColumn" text="ID" prefWidth="70" />
-                        <TableColumn fx:id="nameColumn" text="Name" />
-                        <TableColumn fx:id="locationColumn" text="Location" />
-                        <TableColumn fx:id="balanceColumn" text="Open Balance" />
-                        <TableColumn fx:id="remainingBalanceColumn" text="Total Balance" />
-                        <TableColumn fx:id="phonesColumn" text="Phones" />
-                        <TableColumn fx:id="actionColumn" text="Actions" prefWidth="240" />
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+                        <TableColumn fx:id="nameColumn" text="Name"/>
+                        <TableColumn fx:id="locationColumn" text="Location"/>
+                        <TableColumn fx:id="balanceColumn" text="Open Balance"/>
+                        <TableColumn fx:id="remainingBalanceColumn" text="Total Balance"/>
+                        <TableColumn fx:id="phonesColumn" text="Phones"/>
+                        <TableColumn fx:id="actionColumn" text="Actions" prefWidth="240"/>
                     </columns>
                 </TableView>
             </VBox>
         </center>
 
-        <!-- Footer -->
         <bottom>
-            <VBox spacing="10" styleClass="footer" BorderPane.alignment="CENTER">
+            <VBox spacing="10" styleClass="footer">
 
                 <HBox spacing="12" alignment="CENTER_LEFT" styleClass="stats">
                     <VBox styleClass="stat-card">
-                        <Label text="Customers" styleClass="stat-title" />
-                        <Label fx:id="customerCountLabel" text="0" styleClass="stat-value" />
+                        <Label text="Customers" styleClass="stat-title"/>
+                        <Label fx:id="customerCountLabel" text="0" styleClass="stat-value"/>
                     </VBox>
                     <VBox styleClass="stat-card">
-                        <Label text="Total Open Balance" styleClass="stat-title" />
-                        <Label fx:id="totalOpenBalanceLabel" text="0.00" styleClass="stat-value" />
+                        <Label text="Total Open Balance" styleClass="stat-title"/>
+                        <Label fx:id="totalOpenBalanceLabel" text="0.00" styleClass="stat-value"/>
                     </VBox>
                     <VBox styleClass="stat-card">
-                        <Label text="Total Balance" styleClass="stat-title" />
-                        <Label fx:id="totalBalanceLabel" text="0.00" styleClass="stat-value" />
+                        <Label text="Total Balance" styleClass="stat-title"/>
+                        <Label fx:id="totalBalanceLabel" text="0.00" styleClass="stat-value"/>
                     </VBox>
-                    <Region HBox.hgrow="ALWAYS" />
+                    <Region HBox.hgrow="ALWAYS"/>
                 </HBox>
 
-                <Pagination fx:id="pagination" />
+                <HBox alignment="CENTER_LEFT" spacing="12" styleClass="status-bar">
+                    <Label fx:id="statusLabel" text="Showing 0–0 of 0" styleClass="muted"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Pagination fx:id="pagination"/>
+                </HBox>
+
             </VBox>
         </bottom>
+
     </BorderPane>
 
-    <!-- Loading Overlay -->
-    <ProgressIndicator fx:id="loadingIndicator" visible="false" styleClass="loading-indicator" />
+    <ProgressIndicator fx:id="loadingIndicator" visible="false" styleClass="loading-indicator"/>
 
 </StackPane>
-
-        <!--<?xml version="1.0" encoding="UTF-8"?>-->
-
-<!--<?import javafx.scene.control.Button?>-->
-<!--<?import javafx.scene.control.TableColumn?>-->
-<!--<?import javafx.scene.control.TableView?>-->
-<!--<?import javafx.scene.control.TextField?>-->
-<!--<?import javafx.scene.layout.HBox?>-->
-<!--<?import javafx.scene.layout.VBox?>-->
-<!--<?import javafx.scene.control.Label?>-->
-
-<!--<VBox xmlns="http://javafx.com/javafx/23.0.1"-->
-<!--      xmlns:fx="http://javafx.com/fxml/1"-->
-<!--      fx:controller="com.mahmoud.sales.controller.CustomerController">-->
-
-<!--    &lt;!&ndash; Add new Customer button &ndash;&gt;-->
-<!--    <Button fx:id="addButton" text="Add New Customer" onAction="#handleAddPersonPopup"/>-->
-
-<!--    &lt;!&ndash; Table View (Expands to fill available space) &ndash;&gt;-->
-<!--    <TableView fx:id="personTable" VBox.vgrow="ALWAYS">-->
-<!--        <columns>-->
-<!--            <TableColumn fx:id="idColumn" text="ID" />-->
-<!--            <TableColumn fx:id="nameColumn" text="Name" />-->
-<!--            <TableColumn fx:id="locationColumn" text="Location" />-->
-<!--            <TableColumn fx:id="typeColumn" text="Type" />-->
-<!--            <TableColumn fx:id="balanceColumn" text="Open Balance" />-->
-<!--            <TableColumn fx:id="remainingBalanceColumn" text="Total Balance" />-->
-<!--            <TableColumn fx:id="phonesColumn" text="Phones" />-->
-<!--            <TableColumn fx:id="actionColumn" text="Actions" />-->
-<!--        </columns>-->
-<!--    </TableView>-->
-
-<!--    &lt;!&ndash; Input Fields and Buttons &ndash;&gt;-->
-<!--    <HBox spacing="10">-->
-<!--        <Label fx:id="customerCountLabel" text="Number of Customers: 0" />-->
-<!--        <Label fx:id="totalOpenBalanceLabel" text="Total Open Balance: 0.00" />-->
-<!--        <Label fx:id="totalBalanceLabel" text="أجمالى المديونية: 0.00" />-->
-<!--    </HBox>-->
-
-<!--</VBox>-->

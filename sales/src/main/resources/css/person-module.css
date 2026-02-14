@@ -131,7 +131,7 @@
 }
 
 /* Inputs */
-.text-field {
+.text-field, .combo-box {
     -fx-background-color: white;
     -fx-border-color: #D1D5DB;
     -fx-border-radius: 10;
@@ -139,7 +139,7 @@
     -fx-padding: 8 12;
 }
 
-.text-field:focused {
+.text-field:focused, .combo-box:focused {
     -fx-border-color: #2563EB;
 }
 
@@ -152,4 +152,34 @@
 /* Pagination */
 .pagination {
     -fx-page-information-visible: false;
+}
+
+/* Status bar */
+.status-bar {
+    -fx-padding: 6 0 0 0;
+}
+
+.muted {
+    -fx-text-fill: #6B7280;
+}
+
+/* Dialog / Popups */
+.dialog-root {
+    -fx-padding: 18;
+    -fx-background-color: #F6F7FB;
+}
+
+.dialog-card {
+    -fx-padding: 16;
+    -fx-background-color: white;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 18, 0.2, 0, 6);
+}
+
+.dialog-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-fill: #111827;
 }

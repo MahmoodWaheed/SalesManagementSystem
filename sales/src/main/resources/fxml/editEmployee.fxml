@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mahmoud.sales.controller.EditEmployeeController"
+           stylesheets="@/css/person-module.css"
+           styleClass="dialog-root">
+
+    <VBox spacing="14" styleClass="dialog-card" prefWidth="640">
+        <VBox spacing="4">
+            <Text text="Edit Employee" styleClass="dialog-title"/>
+            <Label text="Update employee information. Use Change Password to update credentials." styleClass="muted"/>
+        </VBox>
+
+        <Separator/>
+
+        <GridPane hgap="12" vgap="12">
+            <Label text="Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nameField" promptText="Name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Role" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="roleField" promptText="Role" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Email" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="emailField" promptText="Email" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Salary" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="salaryField" promptText="Salary" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Password" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <Label fx:id="passwordLabel" text="-" />
+                <CheckBox fx:id="showPasswordCheck" text="Show"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Change Password" onAction="#handleChangePassword" styleClass="btn btn-warning"/>
+            </HBox>
+        </GridPane>
+
+        <Separator/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Cancel" onAction="#handleCancel" styleClass="btn"/>
+            <Button text="Save Changes" onAction="#handleSave" styleClass="btn btn-primary"/>
+        </HBox>
+    </VBox>
+</StackPane>

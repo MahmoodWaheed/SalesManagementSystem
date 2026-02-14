@@ -2,26 +2,70 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.mahmoud.sales.controller.ItemController">
-    <children>
-        <TableView fx:id="itemTable">
-            <columns>
-                <TableColumn fx:id="idColumn" text="ID"/>
-                <TableColumn fx:id="nameColumn" text="Name"/>
-                <TableColumn fx:id="balanceColumn" text="Balance"/>
-                <TableColumn fx:id="sellingPriceColumn" text="Selling Price"/>
-            </columns>
-        </TableView>
+<StackPane fx:id="root"
+           xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mahmoud.sales.controller.ItemController"
+           stylesheets="@/css/person-module.css">
 
-        <HBox spacing="10">
-            <TextField fx:id="nameField" promptText="Name"/>
-            <TextField fx:id="balanceField" promptText="Balance"/>
-            <TextField fx:id="sellingPriceField" promptText="Selling Price"/>
-            <Button fx:id="addButton" text="Add" onAction="#addItem"/>
-            <Button fx:id="deleteButton" text="Delete" onAction="#deleteItem"/>
-        </HBox>
-    </children>
-</VBox>
+    <BorderPane styleClass="screen">
+
+        <top>
+            <VBox spacing="10" styleClass="header">
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Text text="Items" styleClass="title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="addItemButton" text="+ Add Item" onAction="#handleAddItemPopup" styleClass="btn btn-primary"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField" promptText="Search by name or description..." HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="clearSearchButton" text="Clear" onAction="#handleClearSearch" styleClass="btn"/>
+                    <Button fx:id="refreshButton" text="Refresh" onAction="#handleRefresh" styleClass="btn"/>
+                </HBox>
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Sort:" styleClass="muted"/>
+                    <ComboBox fx:id="sortCombo" prefWidth="320"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="Page size:" styleClass="muted"/>
+                    <ComboBox fx:id="pageSizeCombo" prefWidth="110"/>
+                </HBox>
+            </VBox>
+        </top>
+
+        <center>
+            <VBox styleClass="content" spacing="10">
+                <TableView fx:id="itemTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+                        <TableColumn fx:id="nameColumn" text="Name" prefWidth="200"/>
+                        <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="260"/>
+                        <TableColumn fx:id="balanceColumn" text="Balance" prefWidth="110"/>
+                        <TableColumn fx:id="sellingPriceColumn" text="Selling Price" prefWidth="140"/>
+                        <TableColumn fx:id="purchasingPriceColumn" text="Purchasing Price" prefWidth="150"/>
+                        <TableColumn fx:id="actionColumn" text="Actions" prefWidth="260"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </center>
+
+        <bottom>
+            <VBox spacing="10" styleClass="footer">
+                <HBox alignment="CENTER_LEFT" spacing="12" styleClass="status-bar">
+                    <Label fx:id="statusLabel" text="Showing 0–0 of 0" styleClass="muted"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Pagination fx:id="pagination"/>
+                </HBox>
+            </VBox>
+        </bottom>
+
+    </BorderPane>
+
+    <ProgressIndicator fx:id="loadingIndicator" visible="false" styleClass="loading-indicator"/>
+
+</StackPane>

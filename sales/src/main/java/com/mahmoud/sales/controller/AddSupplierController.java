@@ -1,8 +1,10 @@
 package com.mahmoud.sales.controller;
 
 import com.mahmoud.sales.entity.Person;
+import com.mahmoud.sales.entity.Phone;
 import com.mahmoud.sales.handler.PersonHandler;
 import com.mahmoud.sales.service.PersonService;
+import com.mahmoud.sales.service.PhoneService;
 import com.mahmoud.sales.util.SpringFXMLLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,32 +18,33 @@ import java.math.BigDecimal;
 public class AddSupplierController implements PersonHandler {
 
     private PersonService personService;
+    private PhoneService phoneService;
 
-    @FXML
-    private TextField nameField;
-
-    @FXML
-    private TextField locationField;
-
-    @FXML
-    private TextField balanceField;
+    @FXML private TextField nameField;
+    @FXML private TextField locationField;
+    @FXML private TextField balanceField;
+    @FXML private TextField phoneField;
 
     @FXML
     public void initialize() {
-        // Manually wire dependencies using SpringFXMLLoader
         this.personService = SpringFXMLLoader.loadController(PersonService.class);
+        this.phoneService = SpringFXMLLoader.loadController(PhoneService.class);
     }
 
     @FXML
     public void handleSaveSupplier() {
-        // Get values from input fields
-        String name = nameField.getText();
-        String location = locationField.getText();
-        String balanceText = balanceField.getText();
+        String name = safe(nameField.getText());
+        String location = safe(locationField.getText());
+        String balanceText = safe(balanceField.getText());
+        String phoneNumber = safe(phoneField.getText());
 
-        // Validate input
-        if (name.isEmpty() || location.isEmpty() || balanceText.isEmpty()) {
-            showAlert("Validation Error", "Please fill in all fields.");
+        if (name.isBlank() || location.isBlank() || balanceText.isBlank() || phoneNumber.isBlank()) {
+            showAlert("Validation Error", "Please fill in all fields (including phone).");
+            return;
+        }
+
+        if (phoneNumber.length() > 15) {
+            showAlert("Validation Error", "Phone number is too long (max 15).");
             return;
         }
 
@@ -53,23 +56,29 @@ public class AddSupplierController implements PersonHandler {
             return;
         }
 
-        // Create new Person (Supplier)
         Person supplier = new Person();
         supplier.setName(name);
         supplier.setLocation(location);
         supplier.setOpenBalance(balance);
-        supplier.setType("Supplier");  // Set type to Supplier
+        supplier.setType("Supplier");
 
-        // Save the supplier
-        personService.savePerson(supplier);
+        try {
+            Person saved = personService.savePersonAndReturn(supplier);
 
-        // Close the popup window
-        closeWindow();
+            Phone phone = new Phone();
+            phone.setPhoneNumber(phoneNumber);
+            phone.setPerson(saved);
+            phoneService.savePhone(phone);
+
+            closeWindow();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Save Failed", "Failed to save supplier: " + e.getMessage());
+        }
     }
 
     @FXML
     public void handleCancel() {
-        // Close the popup without saving
         closeWindow();
     }
 
@@ -86,9 +95,12 @@ public class AddSupplierController implements PersonHandler {
         alert.showAndWait();
     }
 
+    private String safe(String s) {
+        return s == null ? "" : s.trim();
+    }
+
     @Override
     public void setPerson(Person person) {
-
+        // Not used for Add popup
     }
 }
-

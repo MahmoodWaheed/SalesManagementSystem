@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mahmoud.sales.controller.ViewItemController"
+           stylesheets="@/css/person-module.css"
+           styleClass="dialog-root">
+
+    <VBox spacing="14" styleClass="dialog-card" prefWidth="640">
+        <VBox spacing="4">
+            <Text text="Item Details" styleClass="dialog-title"/>
+            <Label text="Read-only view" styleClass="muted"/>
+        </VBox>
+
+        <Separator/>
+
+        <GridPane hgap="12" vgap="12">
+            <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="idLabel" text="-" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Name" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="nameLabel" text="-" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Description" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="descLabel" text="-" wrapText="true" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Balance" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <Label fx:id="balanceLabel" text="-" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Selling Price" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <Label fx:id="sellingLabel" text="-" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Purchasing Price" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="purchasingLabel" text="-" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <Separator/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Close" onAction="#handleClose" styleClass="btn btn-primary"/>
+        </HBox>
+    </VBox>
+</StackPane>

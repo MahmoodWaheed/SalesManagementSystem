@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -29,10 +30,12 @@ public class Employee {
     @Column(name = "password", length = 45)
     private String password;
 
+    @Column(name = "salary", precision = 18, scale = 2)
+    private BigDecimal salary;
+
     @OneToMany(mappedBy = "employee")
     private Set<Phone> phones = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "salesRep")
     private Set<Transaction> transactions = new LinkedHashSet<>();
-
 }
